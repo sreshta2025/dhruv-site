@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Dhruv - Amazing World 🌟</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/about.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Fredoka+One&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>Dhruv's World 🌟</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">🏠 Home</a></li>
+                <li><a href="about.html" class="nav-link active">👦 About Me</a></li>
+                <li><a href="learning.html" class="nav-link">🧠 Learning Hub</a></li>
+                <li><a href="quizzes.html" class="nav-link">🎯 Quizzes</a></li>
+                <li><a href="youtube.html" class="nav-link">📺 YouTube</a></li>
+                <li><a href="friends.html" class="nav-link">👥 Friends</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Hero Profile Section -->
+        <section class="profile-hero">
+            <div class="container">
+                <div class="profile-content">
+                    <div class="profile-avatar">
+                        <div class="avatar-customizer">
+                            <img src="../images/dhruv-avatar.png" alt="Dhruv's Avatar" class="main-avatar" id="mainAvatar">
+                            <div class="avatar-accessories">
+                                <div class="accessory hat" id="hat">🎩</div>
+                                <div class="accessory glasses" id="glasses">🤓</div>
+                                <div class="accessory smile" id="smile">😊</div>
+                            </div>
+                        </div>
+                        <div class="avatar-controls">
+                            <button class="avatar-btn" onclick="changeExpression()">😊 Change Expression</button>
+                            <button class="avatar-btn" onclick="toggleHat()">🎩 Hat</button>
+                            <button class="avatar-btn" onclick="toggleGlasses()">🤓 Glasses</button>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h1 class="profile-title">
+                            <span class="greeting">Hi! I'm</span>
+                            <span class="name">Dhruv!</span>
+                            <span class="wave">👋</span>
+                        </h1>
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📚</span>
+                                <span class="detail-text">4th Grade Student</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">🎂</span>
+                                <span class="detail-text">9 Years Old</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">🏫</span>
+                                <span class="detail-text">Smart & Curious</span>
+                            </div>
+                        </div>
+                        <div class="personality-traits">
+                            <div class="trait creative">🎨 Creative</div>
+                            <div class="trait smart">🧠 Smart</div>
+                            <div class="trait friendly">😊 Friendly</div>
+                            <div class="trait curious">🔍 Curious</div>
+                            <div class="trait funny">😄 Funny</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hobbies Showcase -->
+        <section class="hobbies-section">
+            <div class="container">
+                <h2 class="section-title">My Amazing Hobbies! 🎮</h2>
+                <div class="hobbies-grid">
+                    <div class="hobby-card chess-card">
+                        <div class="hobby-icon">♟️</div>
+                        <h3>Chess Master</h3>
+                        <p>I love playing chess and learning new strategies!</p>
+                        <div class="chess-board" id="chessBoard">
+                            <div class="chess-piece">♜</div>
+                            <div class="chess-piece">♞</div>
+                            <div class="chess-piece">♝</div>
+                            <div class="chess-piece">♛</div>
+                            <div class="chess-piece">♚</div>
+                            <div class="chess-piece">♝</div>
+                            <div class="chess-piece">♞</div>
+                            <div class="chess-piece">♜</div>
+                        </div>
+                        <div class="chess-tip">
+                            <strong>Today's Tip:</strong> Control the center squares early!
+                        </div>
+                    </div>
+
+                    <div class="hobby-card cricket-card">
+                        <div class="hobby-icon">🏏</div>
+                        <h3>Cricket Champion</h3>
+                        <p>Batting and bowling are my favorite sports activities!</p>
+                        <div class="cricket-animation">
+                            <div class="cricket-bat" id="cricketBat">🏏</div>
+                            <div class="cricket-ball" id="cricketBall">🏀</div>
+                            <div class="cricket-wickets">🥅</div>
+                        </div>
+                        <button class="action-btn" onclick="playCricket()">🏏 Play Cricket!</button>
+                    </div>
+
+                    <div class="hobby-card youtube-card">
+                        <div class="hobby-icon">📺</div>
+                        <h3>YouTube Creator</h3>
+                        <p>I create fun and educational videos on RoyalIQFun!</p>
+                        <div class="youtube-stats">
+                            <div class="stat">
+                                <span class="stat-number">15</span>
+                                <span class="stat-label">Videos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">250+</span>
+                                <span class="stat-label">Subscribers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">5K</span>
+                                <span class="stat-label">Views</span>
+                            </div>
+                        </div>
+                        <button class="action-btn" onclick="visitYouTube()">📺 Visit Channel</button>
+                    </div>
+
+                    <div class="hobby-card rubiks-card">
+                        <div class="hobby-icon">🧩</div>
+                        <h3>Rubik's Cube Solver</h3>
+                        <p>I can solve the Rubik's cube in under 2 minutes!</p>
+                        <div class="rubiks-cube" id="rubiksCube">
+                            <div class="cube-face front">
+                                <div class="cube-square red"></div>
+                                <div class="cube-square white"></div>
+                                <div class="cube-square blue"></div>
+                                <div class="cube-square yellow"></div>
+                                <div class="cube-square green"></div>
+                                <div class="cube-square orange"></div>
+                                <div class="cube-square red"></div>
+                                <div class="cube-square white"></div>
+                                <div class="cube-square blue"></div>
+                            </div>
+                        </div>
+                        <button class="action-btn" onclick="solveCube()">🧩 Solve Cube!</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fun Facts -->
+        <section class="fun-facts">
+            <div class="container">
+                <h2 class="section-title">Fun Facts About Me! 🎉</h2>
+                <div class="facts-carousel">
+                    <div class="fact-card active" data-fact="1">
+                        <div class="fact-bubble">
+                            <div class="fact-icon">🎯</div>
+                            <p>I can solve math problems really fast in my head!</p>
+                        </div>
+                    </div>
+                    <div class="fact-card" data-fact="2">
+                        <div class="fact-bubble">
+                            <div class="fact-icon">🎨</div>
+                            <p>I love drawing cartoon characters and superheroes!</p>
+                        </div>
+                    </div>
+                    <div class="fact-card" data-fact="3">
+                        <div class="fact-bubble">
+                            <div class="fact-icon">🌟</div>
+                            <p>My favorite subject is Science because experiments are cool!</p>
+                        </div>
+                    </div>
+                    <div class="fact-card" data-fact="4">
+                        <div class="fact-bubble">
+                            <div class="fact-icon">🚀</div>
+                            <p>I want to be a scientist or a game developer when I grow up!</p>
+                        </div>
+                    </div>
+                    <div class="fact-card" data-fact="5">
+                        <div class="fact-bubble">
+                            <div class="fact-icon">📚</div>
+                            <p>I read at least one book every week!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" onclick="previousFact()">⬅️</button>
+                    <div class="carousel-indicators">
+                        <span class="indicator active" data-slide="0"></span>
+                        <span class="indicator" data-slide="1"></span>
+                        <span class="indicator" data-slide="2"></span>
+                        <span class="indicator" data-slide="3"></span>
+                        <span class="indicator" data-slide="4"></span>
+                    </div>
+                    <button class="carousel-btn next" onclick="nextFact()">➡️</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievement Gallery -->
+        <section class="achievements">
+            <div class="container">
+                <h2 class="section-title">My Achievements! 🏆</h2>
+                <div class="achievement-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-badge">🏆</div>
+                        <h3>Chess Tournament Winner</h3>
+                        <p>1st Place in School Chess Championship 2024</p>
+                        <div class="achievement-date">March 2024</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-badge">📺</div>
+                        <h3>YouTube Milestone</h3>
+                        <p>Reached 250+ subscribers on RoyalIQFun</p>
+                        <div class="achievement-date">April 2024</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-badge">📚</div>
+                        <h3>Reading Champion</h3>
+                        <p>Read 25 books in the school reading challenge</p>
+                        <div class="achievement-date">May 2024</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-badge">🧮</div>
+                        <h3>Math Whiz</h3>
+                        <p>Perfect score on all math quizzes this semester</p>
+                        <div class="achievement-date">Ongoing</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-badge">🎨</div>
+                        <h3>Art Contest Winner</h3>
+                        <p>2nd Place in School Art Competition</p>
+                        <div class="achievement-date">February 2024</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-badge">🤝</div>
+                        <h3>Helpful Friend</h3>
+                        <p>Helped 10 classmates with homework</p>
+                        <div class="achievement-date">Always</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Goals Section -->
+        <section class="goals-section">
+            <div class="container">
+                <h2 class="section-title">My Goals! 🎯</h2>
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <div class="goal-icon">🏆</div>
+                        <h3>Chess Master</h3>
+                        <p>Become a chess grandmaster by age 15</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%"></div>
+                        </div>
+                        <span class="progress-text">25% Complete</span>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon">📺</div>
+                        <h3>YouTube Success</h3>
+                        <p>Reach 1,000 subscribers on RoyalIQFun</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%"></div>
+                        </div>
+                        <span class="progress-text">25% Complete</span>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon">🎓</div>
+                        <h3>Academic Excellence</h3>
+                        <p>Maintain straight A's throughout the year</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                        <span class="progress-text">90% Complete</span>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon">🌟</div>
+                        <h3>Help Others</h3>
+                        <p>Teach 50 kids new things through my videos</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 30%"></div>
+                        </div>
+                        <span class="progress-text">30% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Dhruv's Amazing World. Made with 💙 for learning and fun!</p>
+                <div class="footer-links">
+                    <a href="../index.html" class="footer-link">🏠 Home</a>
+                    <a href="#" class="footer-link">📧 Contact</a>
+                    <a href="quizzes.html" class="footer-link">🎯 Games</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/about.js"></script>
+</body>
+</html>

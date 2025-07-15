@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhruv's Amazing World 🌟</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Fredoka+One&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>Dhruv's World 🌟</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">🏠 Home</a></li>
+                <li><a href="pages/about.html" class="nav-link">👦 About Me</a></li>
+                <li><a href="pages/learning.html" class="nav-link">🧠 Learning Hub</a></li>
+                <li><a href="pages/quizzes.html" class="nav-link">🎯 Quizzes</a></li>
+                <li><a href="pages/youtube.html" class="nav-link">📺 YouTube</a></li>
+                <li><a href="pages/friends.html" class="nav-link">👥 Friends</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-background">
+                <div class="floating-shapes">
+                    <div class="shape shape-1">⭐</div>
+                    <div class="shape shape-2">🚀</div>
+                    <div class="shape shape-3">🎯</div>
+                    <div class="shape shape-4">🧠</div>
+                    <div class="shape shape-5">🎨</div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-avatar">
+                    <div class="avatar-container">
+                        <img src="images/dhruv-avatar.png" alt="Dhruv's Avatar" class="avatar-img">
+                        <div class="avatar-glow"></div>
+                    </div>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-main">Welcome to</span>
+                    <span class="title-highlight">Dhruv's Amazing World!</span>
+                    <span class="title-emoji">🌟</span>
+                </h1>
+                <p class="hero-subtitle">Where Learning Meets Adventure! 🚀</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="startAdventure()">Start Adventure! 🎯</button>
+                    <button class="btn btn-secondary" onclick="showDailyChallenge()">Daily Challenge 🧠</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Features -->
+        <section class="daily-features">
+            <div class="container">
+                <h2 class="section-title">Today's Special! ✨</h2>
+                <div class="features-grid">
+                    <div class="feature-card brain-buster">
+                        <div class="card-header">
+                            <h3>🧠 Brain Buster</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="challenge-question">If you have 12 apples and eat 3, then buy 8 more, how many apples do you have?</p>
+                            <div class="challenge-options">
+                                <button class="option-btn" onclick="checkAnswer(this, false)">15</button>
+                                <button class="option-btn" onclick="checkAnswer(this, true)">17</button>
+                                <button class="option-btn" onclick="checkAnswer(this, false)">20</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card idiom-card">
+                        <div class="card-header">
+                            <h3>💬 Idiom of the Day</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="idiom-display">
+                                <p class="idiom-text">"Break a leg!"</p>
+                                <div class="idiom-animation">🎭</div>
+                            </div>
+                            <p class="idiom-meaning">Means: Good luck! (Used especially before a performance)</p>
+                            <button class="btn btn-small" onclick="showIdiomExample()">Show Example</button>
+                        </div>
+                    </div>
+
+                    <div class="feature-card science-fact">
+                        <div class="card-header">
+                            <h3>🔬 Science Fact</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="fact-display">
+                                <div class="fact-icon">🐙</div>
+                                <p class="fact-text">Did you know octopuses have three hearts?</p>
+                            </div>
+                            <button class="btn btn-small" onclick="showMoreFacts()">More Facts!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Access -->
+        <section class="quick-access">
+            <div class="container">
+                <h2 class="section-title">Jump Into Fun! 🎮</h2>
+                <div class="access-grid">
+                    <a href="pages/learning.html" class="access-card math-card">
+                        <div class="card-icon">🧮</div>
+                        <h3>Math Magic</h3>
+                        <p>Number tricks & puzzles</p>
+                    </a>
+                    <a href="pages/quizzes.html" class="access-card quiz-card">
+                        <div class="card-icon">🎯</div>
+                        <h3>Quiz Arena</h3>
+                        <p>Test your knowledge</p>
+                    </a>
+                    <a href="pages/youtube.html" class="access-card youtube-card">
+                        <div class="card-icon">📺</div>
+                        <h3>RoyalIQFun</h3>
+                        <p>Latest videos</p>
+                    </a>
+                    <a href="pages/about.html" class="access-card about-card">
+                        <div class="card-icon">♟️</div>
+                        <h3>Chess Tips</h3>
+                        <p>Master the game</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Counter -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="1250">0</div>
+                        <div class="stat-label">Visitors</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="89">0</div>
+                        <div class="stat-label">Quizzes Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="45">0</div>
+                        <div class="stat-label">New Friends</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="15">0</div>
+                        <div class="stat-label">YouTube Videos</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Dhruv's Amazing World. Made with 💙 for learning and fun!</p>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">🏠 Home</a>
+                    <a href="#" class="footer-link">📧 Contact</a>
+                    <a href="#" class="footer-link">🎯 Games</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
