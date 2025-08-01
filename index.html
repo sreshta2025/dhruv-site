@@ -3,181 +3,559 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhruv's Amazing World 🌟</title>
-    <link rel="stylesheet" href="css/main.css">
+    <title>Dhruv's Space Adventure - 4th Grade Explorer</title>
+    <meta name="description" content="Welcome to Dhruv's amazing space-themed website! Join me on adventures through cricket, books, and dreams of becoming an elemental lion!">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Fredoka+One&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
+    
+    <!-- Starfield Background -->
+    <div class="starfield" id="starfield"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <h1>Dhruv's World 🌟</h1>
+            <div class="nav-brand">
+                <div class="logo">
+                    <span class="logo-text">DHRUV</span>
+                    <div class="logo-orbit">
+                        <div class="orbit-ring"></div>
+                        <div class="planet"></div>
+                    </div>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link active">🏠 Home</a></li>
-                <li><a href="pages/about.html" class="nav-link">👦 About Me</a></li>
-                <li><a href="pages/learning.html" class="nav-link">🧠 Learning Hub</a></li>
-                <li><a href="pages/quizzes.html" class="nav-link">🎯 Quizzes</a></li>
-                <li><a href="pages/youtube.html" class="nav-link">📺 YouTube</a></li>
-                <li><a href="pages/friends.html" class="nav-link">👥 Friends</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active">🏠 Home</a>
+                <a href="#about" class="nav-link">🚀 About Me</a>
+                <a href="#interests" class="nav-link">🎮 My World</a>
+                <a href="#dreams" class="nav-link">⭐ Dreams</a>
+                <a href="#guestbook" class="nav-link">📝 Guestbook</a>
+            </div>
+
+            <div class="nav-controls">
+                <button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+                    <span class="music-icon">🎵</span>
+                </button>
+                <button class="surprise-btn" id="surpriseBtn" aria-label="Surprise button">
+                    <span class="surprise-icon">✨</span>
+                </button>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </nav>
 
-    <main>
+    <!-- Main Content -->
+    <main class="main-content">
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-background">
-                <div class="floating-shapes">
-                    <div class="shape shape-1">⭐</div>
-                    <div class="shape shape-2">🚀</div>
-                    <div class="shape shape-3">🎯</div>
-                    <div class="shape shape-4">🧠</div>
-                    <div class="shape shape-5">🎨</div>
+        <section class="hero-section" id="home">
+            <div class="hero-bg">
+                <div class="floating-planets">
+                    <div class="planet planet-1">🪐</div>
+                    <div class="planet planet-2">🌍</div>
+                    <div class="planet planet-3">🌙</div>
                 </div>
+                <div class="cosmic-particles"></div>
             </div>
-            <div class="hero-content">
-                <div class="hero-avatar">
-                    <div class="avatar-container">
-                        <img src="images/dhruv-avatar.png" alt="Dhruv's Avatar" class="avatar-img">
-                        <div class="avatar-glow"></div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-greeting">
+                        <div class="greeting-animation">
+                            <span class="wave">👋</span>
+                            <h1 class="hero-title">
+                                Hi! I'm <span class="name-highlight">Dhruv</span>!
+                            </h1>
+                        </div>
+                        <div class="hero-subtitle">
+                            <p class="age-info">🚀 9 years old • 4th Grade Explorer • Michigan, USA</p>
+                            <p class="fun-intro">Welcome to my space adventure! Ready to explore my universe? 🌟</p>
+                        </div>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary" onclick="scrollToSection('about')">
+                                <span>Start Adventure</span>
+                                <span class="btn-rocket">🚀</span>
+                            </button>
+                            <button class="btn btn-secondary surprise-trigger" onclick="triggerSurprise()">
+                                <span>Surprise Me!</span>
+                                <span class="btn-sparkle">✨</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-character">
+                        <div class="astronaut-dhruv">
+                            <div class="astronaut-body">👨‍🚀</div>
+                            <div class="speech-bubble">
+                                <p>"Something cool about me? I love Wings of Fire books!"</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <h1 class="hero-title">
-                    <span class="title-main">Welcome to</span>
-                    <span class="title-highlight">Dhruv's Amazing World!</span>
-                    <span class="title-emoji">🌟</span>
-                </h1>
-                <p class="hero-subtitle">Where Learning Meets Adventure! 🚀</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="startAdventure()">Start Adventure! 🎯</button>
-                    <button class="btn btn-secondary" onclick="showDailyChallenge()">Daily Challenge 🧠</button>
+                
+                <div class="scroll-indicator">
+                    <div class="scroll-text">Scroll to explore my universe</div>
+                    <div class="scroll-arrow">🚀</div>
                 </div>
             </div>
         </section>
 
-        <!-- Daily Features -->
-        <section class="daily-features">
+        <!-- About Me Section -->
+        <section class="about-section" id="about">
+            <div class="section-bg">
+                <div class="constellation-pattern"></div>
+                <div class="floating-emojis">
+                    <div class="emoji emoji-1">📚</div>
+                    <div class="emoji emoji-2">🏏</div>
+                    <div class="emoji emoji-3">🎮</div>
+                </div>
+            </div>
+            
             <div class="container">
-                <h2 class="section-title">Today's Special! ✨</h2>
-                <div class="features-grid">
-                    <div class="feature-card brain-buster">
+                <div class="section-header">
+                    <h2 class="section-title">About This Space Explorer</h2>
+                    <p class="section-subtitle">Get to know the real me and what makes me tick! 🌟</p>
+                </div>
+                
+                <div class="about-grid">
+                    <div class="about-card main-card">
                         <div class="card-header">
-                            <h3>🧠 Brain Buster</h3>
+                            <div class="card-icon">🚀</div>
+                            <h3>Mission Control</h3>
                         </div>
                         <div class="card-content">
-                            <p class="challenge-question">If you have 12 apples and eat 3, then buy 8 more, how many apples do you have?</p>
-                            <div class="challenge-options">
-                                <button class="option-btn" onclick="checkAnswer(this, false)">15</button>
-                                <button class="option-btn" onclick="checkAnswer(this, true)">17</button>
-                                <button class="option-btn" onclick="checkAnswer(this, false)">20</button>
+                            <p>I'm Dhruv (that's my nickname for Dhruvtej Nallamothu)! I live in Michigan with my family, and I'm super excited about starting 4th grade. My sister makes me laugh in the most unexpected ways! 😄</p>
+                            <div class="fun-facts">
+                                <div class="fact-item">
+                                    <span class="fact-icon">💙</span>
+                                    <span>Favorite Color: Blue</span>
+                                </div>
+                                <div class="fact-item">
+                                    <span class="fact-icon">🏠</span>
+                                    <span>From: Michigan, USA</span>
+                                </div>
+                                <div class="fact-item">
+                                    <span class="fact-icon">👨‍👩‍👧‍👦</span>
+                                    <span>Family: Dad, Mom & 1 awesome sister</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="feature-card idiom-card">
+                    
+                    <div class="about-card school-card">
                         <div class="card-header">
-                            <h3>💬 Idiom of the Day</h3>
+                            <div class="card-icon">📚</div>
+                            <h3>School Universe</h3>
                         </div>
                         <div class="card-content">
-                            <div class="idiom-display">
-                                <p class="idiom-text">"Break a leg!"</p>
-                                <div class="idiom-animation">🎭</div>
+                            <p>Subjects I absolutely love:</p>
+                            <div class="subject-pills">
+                                <span class="pill math">🔢 Math</span>
+                                <span class="pill science">🧪 Science</span>
+                                <span class="pill ela">📖 ELA</span>
+                                <span class="pill gym">🏃‍♂️ Gym</span>
+                                <span class="pill music">🎵 Music</span>
                             </div>
-                            <p class="idiom-meaning">Means: Good luck! (Used especially before a performance)</p>
-                            <button class="btn btn-small" onclick="showIdiomExample()">Show Example</button>
                         </div>
                     </div>
-
-                    <div class="feature-card science-fact">
+                    
+                    <div class="about-card hero-card">
                         <div class="card-header">
-                            <h3>🔬 Science Fact</h3>
+                            <div class="card-icon">🦸‍♂️</div>
+                            <h3>My Heroes</h3>
                         </div>
                         <div class="card-content">
-                            <div class="fact-display">
-                                <div class="fact-icon">🐙</div>
-                                <p class="fact-text">Did you know octopuses have three hearts?</p>
+                            <div class="heroes-list">
+                                <div class="hero-item">
+                                    <span class="hero-icon">💪</span>
+                                    <span>Superman & Flash</span>
+                                </div>
+                                <div class="hero-item">
+                                    <span class="hero-icon">👨</span>
+                                    <span>My Dad (biggest hero!)</span>
+                                </div>
+                                <div class="hero-item">
+                                    <span class="hero-icon">🎬</span>
+                                    <span>RRR Movie</span>
+                                </div>
                             </div>
-                            <button class="btn btn-small" onclick="showMoreFacts()">More Facts!</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Quick Access -->
-        <section class="quick-access">
+        <!-- Interests Section -->
+        <section class="interests-section" id="interests">
             <div class="container">
-                <h2 class="section-title">Jump Into Fun! 🎮</h2>
-                <div class="access-grid">
-                    <a href="pages/learning.html" class="access-card math-card">
-                        <div class="card-icon">🧮</div>
-                        <h3>Math Magic</h3>
-                        <p>Number tricks & puzzles</p>
-                    </a>
-                    <a href="pages/quizzes.html" class="access-card quiz-card">
-                        <div class="card-icon">🎯</div>
-                        <h3>Quiz Arena</h3>
-                        <p>Test your knowledge</p>
-                    </a>
-                    <a href="pages/youtube.html" class="access-card youtube-card">
-                        <div class="card-icon">📺</div>
-                        <h3>RoyalIQFun</h3>
-                        <p>Latest videos</p>
-                    </a>
-                    <a href="pages/about.html" class="access-card about-card">
-                        <div class="card-icon">♟️</div>
-                        <h3>Chess Tips</h3>
-                        <p>Master the game</p>
-                    </a>
+                <div class="section-header">
+                    <h2 class="section-title">My Amazing World</h2>
+                    <p class="section-subtitle">All the cool stuff I love doing! 🎮📚🏏</p>
+                </div>
+                
+                <div class="interests-tabs">
+                    <button class="tab-btn active" data-tab="sports">🏏 Sports & Games</button>
+                    <button class="tab-btn" data-tab="reading">📚 Reading Corner</button>
+                    <button class="tab-btn" data-tab="weekend">🎉 Weekend Fun</button>
+                    <button class="tab-btn" data-tab="entertainment">🎬 Entertainment</button>
+                </div>
+                
+                <div class="tab-content active" id="sports">
+                    <div class="interests-grid">
+                        <div class="interest-card featured">
+                            <div class="card-glow"></div>
+                            <div class="card-header">
+                                <div class="card-icon big">🏏</div>
+                                <h3>Cricket - My Passion!</h3>
+                                <div class="featured-badge">⭐ Dream Career</div>
+                            </div>
+                            <p>I LOVE cricket! I play with dad and my sister outside. My biggest dream is to become a professional cricket player! 🏆</p>
+                        </div>
+                        
+                        <div class="interest-card">
+                            <div class="card-header">
+                                <div class="card-icon">♟️</div>
+                                <h3>Chess Master</h3>
+                            </div>
+                            <p>Strategy and thinking ahead - that's my game!</p>
+                        </div>
+                        
+                        <div class="interest-card">
+                            <div class="card-header">
+                                <div class="card-icon">🎮</div>
+                                <h3>Video Games</h3>
+                            </div>
+                            <p>Fortnite, Roblox, and Minecraft are my favorites!</p>
+                            <div class="game-pills">
+                                <span class="game-pill">Fortnite</span>
+                                <span class="game-pill">Roblox</span>
+                                <span class="game-pill">Minecraft</span>
+                            </div>
+                        </div>
+                        
+                        <div class="interest-card">
+                            <div class="card-header">
+                                <div class="card-icon">🎲</div>
+                                <h3>Board Games</h3>
+                            </div>
+                            <p>Family game nights with Caroms, Ludo, and Uno!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="reading">
+                    <div class="reading-showcase">
+                        <div class="book-collection">
+                            <div class="book-card favorite">
+                                <div class="book-cover">🐉</div>
+                                <div class="book-info">
+                                    <h4>Wings of Fire</h4>
+                                    <p>Graphic novels - my absolute favorite!</p>
+                                    <div class="favorite-star">⭐</div>
+                                </div>
+                            </div>
+                            
+                            <div class="book-card">
+                                <div class="book-cover">🐕</div>
+                                <div class="book-info">
+                                    <h4>Dog Man Series</h4>
+                                    <p>Hilarious adventures!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="book-card">
+                                <div class="book-cover">🤖</div>
+                                <div class="book-info">
+                                    <h4>The Wild Robot</h4>
+                                    <p>Amazing robot story!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="book-card">
+                                <div class="book-cover">🧟</div>
+                                <div class="book-info">
+                                    <h4>Last Kids on Earth</h4>
+                                    <p>Zombie apocalypse fun!</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="reading-quote">
+                            <div class="quote-bubble">
+                                <p>"Books take me on amazing adventures without leaving my room!"</p>
+                                <div class="quote-author">- Dhruv 📚</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="weekend">
+                    <div class="weekend-grid">
+                        <div class="weekend-card">
+                            <div class="card-icon">📺</div>
+                            <h3>TV & Movies</h3>
+                            <p>Comedy movies make me laugh so much! And watching cool shows with family.</p>
+                        </div>
+                        
+                        <div class="weekend-card">
+                            <div class="card-icon">🏏</div>
+                            <h3>Cricket Time!</h3>
+                            <p>Playing cricket outside with dad and sister - the best part of my weekend!</p>
+                        </div>
+                        
+                        <div class="weekend-card">
+                            <div class="card-icon">📖</div>
+                            <h3>Reading Adventures</h3>
+                            <p>Curling up with my favorite books and getting lost in amazing stories.</p>
+                        </div>
+                        
+                        <div class="weekend-card">
+                            <div class="card-icon">🎮</div>
+                            <h3>Gaming Sessions</h3>
+                            <p>Epic battles in Fortnite and building amazing worlds in Minecraft!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="entertainment">
+                    <div class="entertainment-showcase">
+                        <div class="movie-section">
+                            <h3>🎬 Favorite Movies</h3>
+                            <div class="movie-cards">
+                                <div class="movie-card">
+                                    <div class="movie-poster">🦸‍♂️</div>
+                                    <h4>RRR</h4>
+                                    <p>Epic Tollywood movie!</p>
+                                </div>
+                                <div class="movie-card">
+                                    <div class="movie-poster">🐉</div>
+                                    <h4>How to Train Your Dragon</h4>
+                                    <p>Dragons are awesome!</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="music-section">
+                            <h3>🎵 Music I Love</h3>
+                            <div class="music-player">
+                                <div class="music-info">
+                                    <p>Tollywood music gets me dancing! 💃</p>
+                                    <div class="music-notes">🎵 🎶 🎵</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Stats Counter -->
-        <section class="stats-section">
+        <!-- Dreams Section -->
+        <section class="dreams-section" id="dreams">
+            <div class="section-bg">
+                <div class="galaxy-bg"></div>
+                <div class="shooting-stars"></div>
+            </div>
+            
             <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="1250">0</div>
-                        <div class="stat-label">Visitors</div>
+                <div class="section-header">
+                    <h2 class="section-title">My Big Dreams & Goals</h2>
+                    <p class="section-subtitle">Reach for the stars! Here's what I'm dreaming about! 🌟</p>
+                </div>
+                
+                <div class="dreams-timeline">
+                    <div class="dream-card mega-dream">
+                        <div class="dream-glow"></div>
+                        <div class="dream-icon">🦁</div>
+                        <div class="dream-content">
+                            <h3>Become an Elemental Lion!</h3>
+                            <p>This is my BIGGEST dream ever! An elemental lion with cosmic powers would be the coolest thing in the universe! 🌟</p>
+                            <div class="power-list">
+                                <span class="power">🔥 Fire</span>
+                                <span class="power">💧 Water</span>
+                                <span class="power">🌪️ Air</span>
+                                <span class="power">🌍 Earth</span>
+                                <span class="power">🌌 Cosmic</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="89">0</div>
-                        <div class="stat-label">Quizzes Completed</div>
+                    
+                    <div class="dreams-grid">
+                        <div class="dream-card">
+                            <div class="dream-icon">🏏</div>
+                            <h3>Cricket Player</h3>
+                            <p>Play professional cricket and represent my team! 🏆</p>
+                        </div>
+                        
+                        <div class="dream-card">
+                            <div class="dream-icon">🧠</div>
+                            <h3>Neurologist</h3>
+                            <p>Or maybe become a doctor who studies brains - so cool! 🔬</p>
+                        </div>
+                        
+                        <div class="dream-card">
+                            <div class="dream-icon">🚀</div>
+                            <h3>Go to Space!</h3>
+                            <p>My dream field trip would be visiting space! 🌟</p>
+                        </div>
+                        
+                        <div class="dream-card">
+                            <div class="dream-icon">🏙️</div>
+                            <h3>Visit Hyderabad</h3>
+                            <p>Travel to Hyderabad, India and explore my heritage! 🇮🇳</p>
+                        </div>
+                        
+                        <div class="dream-card">
+                            <div class="dream-icon">🤖</div>
+                            <h3>Build a Robot</h3>
+                            <p>Create my own personal assistant robot! How awesome would that be? 🔧</p>
+                        </div>
+                        
+                        <div class="dream-card">
+                            <div class="dream-icon">🌍</div>
+                            <h3>Safe World</h3>
+                            <p>Help build a world where everyone is safe and happy! 💙</p>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="45">0</div>
-                        <div class="stat-label">New Friends</div>
+                    
+                    <div class="current-goal">
+                        <div class="goal-header">
+                            <h3>🎯 This Year's Mission</h3>
+                        </div>
+                        <div class="goal-content">
+                            <p>Finish 4th grade Khan Academy and become even smarter! 📚✨</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                                <span class="progress-text">In Progress...</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="15">0</div>
-                        <div class="stat-label">YouTube Videos</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guestbook Section -->
+        <section class="guestbook-section" id="guestbook">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Space Guestbook</h2>
+                    <p class="section-subtitle">Leave me a message from your corner of the universe! 🌌</p>
+                </div>
+                
+                <div class="guestbook-container">
+                    <div class="guestbook-form">
+                        <form id="guestbookForm">
+                            <div class="form-group">
+                                <label for="visitorName">Your Name (fellow explorer!)</label>
+                                <input type="text" id="visitorName" name="name" placeholder="What should I call you?" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="visitorMessage">Your Space Message</label>
+                                <textarea id="visitorMessage" name="message" placeholder="Say hi, ask me about cricket, or tell me about your favorite book!" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="visitorPlanet">Your Home Planet</label>
+                                <input type="text" id="visitorPlanet" name="planet" placeholder="Earth? Mars? Somewhere cooler?">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <span>Send to Space Station</span>
+                                <span class="btn-rocket">🚀</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="messages-display">
+                        <h3>Messages from Space Explorers</h3>
+                        <div class="messages-container" id="messagesContainer">
+                            <div class="message-card sample">
+                                <div class="message-header">
+                                    <span class="visitor-name">🚀 Space Captain Alex</span>
+                                    <span class="visitor-planet">From: Planet Awesome</span>
+                                </div>
+                                <div class="message-content">
+                                    "Hey Dhruv! Your website is so cool! I love cricket too and Wings of Fire is amazing! Keep being awesome! 🌟"
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2024 Dhruv's Amazing World. Made with 💙 for learning and fun!</p>
-                <div class="footer-links">
-                    <a href="#" class="footer-link">🏠 Home</a>
-                    <a href="#" class="footer-link">📧 Contact</a>
-                    <a href="#" class="footer-link">🎯 Games</a>
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-text">DHRUV</span>
+                        <div class="logo-orbit">
+                            <div class="orbit-ring"></div>
+                            <div class="planet"></div>
+                        </div>
+                    </div>
+                    <p>4th Grade Space Explorer • Michigan, USA 🚀</p>
                 </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Quick Links</h4>
+                        <a href="#home">Home Base</a>
+                        <a href="#about">About Me</a>
+                        <a href="#interests">My World</a>
+                        <a href="#dreams">Dreams</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Fun Stuff</h4>
+                        <button class="footer-btn" onclick="triggerSurprise()">Surprise Me!</button>
+                        <button class="footer-btn" onclick="toggleMusic()">🎵 Music</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Dhruv Nallamothu | Made with 💙 and lots of 🚀 | Future Elemental Lion</p>
+                <div class="footer-emoji-trail">🌟 ⚡ 🦁 🏏 📚 🚀 🌟</div>
             </div>
         </div>
     </footer>
+
+    <!-- Surprise Modal -->
+    <div class="surprise-modal" id="surpriseModal">
+        <div class="modal-content">
+            <div class="surprise-animation">
+                <div class="surprise-text">🎉 SURPRISE! 🎉</div>
+                <div class="fun-facts-carousel">
+                    <div class="fun-fact active">Did you know? I want to invent a robot assistant! 🤖</div>
+                    <div class="fun-fact">My sister makes me laugh in the most unexpected ways! 😄</div>
+                    <div class="fun-fact">I dream of going to space as a field trip! 🚀</div>
+                    <div class="fun-fact">Tollywood music makes me want to dance! 💃</div>
+                    <div class="fun-fact">My biggest dream is becoming an elemental lion! 🦁⚡</div>
+                </div>
+                <button class="close-surprise" onclick="closeSurprise()">Close ✨</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/main.js"></script>
 </body>
