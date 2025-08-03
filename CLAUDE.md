@@ -4,167 +4,180 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is **Dhruv's Amazing World** - a vibrant, interactive personal website for a brilliant 4th-grade student. It's designed as a digital playground that combines fun, learning, and creativity, featuring educational content, games, and interactive elements.
+This is **Dhruv's Space Adventure** - a space-themed personal website for Dhruv, a 9-year-old 4th-grade student from Michigan. The website combines a cosmic aesthetic with interactive elements, animations, and engaging content about Dhruv's interests, dreams, and personality.
 
 ## Project Structure
 
 ```
-/Users/ngsankar/dev/dhruvweb/
-├── index.html                 # Homepage with hero section and daily features
+C:\Code\dhruv-site\
+├── index.html                 # Main space-themed homepage with all sections
 ├── css/
-│   ├── main.css              # Core styles, animations, and responsive design
-│   ├── about.css             # About page specific styles
-│   └── learning.css          # Learning hub specific styles
+│   ├── main.css              # Complete space-themed styles and animations
+│   ├── about.css             # About page specific styles (legacy)
+│   └── learning.css          # Learning hub specific styles (legacy)
 ├── js/
-│   ├── main.js               # Core JavaScript functionality
-│   ├── about.js              # About page interactive features
-│   └── learning.js           # Learning hub games and activities
+│   ├── main.js               # Core interactive JavaScript functionality
+│   ├── about.js              # About page interactive features (legacy)
+│   └── learning.js           # Learning hub games and activities (legacy)
 ├── pages/
-│   ├── about.html            # About Me page with hobbies and achievements
-│   ├── learning.html         # Smart Tips & Tricks Hub
-│   ├── quizzes.html          # Quizzes & Challenges Arena (to be created)
-│   ├── youtube.html          # YouTube Channel Showcase (to be created)
-│   └── friends.html          # Friends & Guestbook (to be created)
-├── images/                   # Directory for avatars and visual assets
-└── .claude/
-    └── settings.local.json   # Claude Code configuration
+│   ├── about.html            # Legacy about page (different from main site)
+│   └── learning.html         # Legacy learning page (different from main site)
+└── CLAUDE.md                 # This file
 ```
 
 ## Development Commands
 
-Since this is a static HTML/CSS/JavaScript website, no build tools are required:
+This is a static HTML/CSS/JavaScript website with no build process:
 
-- **Local Development**: Open `index.html` in a web browser or use a local server
-- **Live Server**: Use VS Code Live Server extension or `python -m http.server 8000`
-- **Testing**: Manual testing across different browsers and devices
+- **Local Development**: Open `index.html` directly in browser or use live server
+- **Live Server**: `python -m http.server 8000` or VS Code Live Server extension
+- **Testing**: Manual cross-browser testing (Chrome, Firefox, Safari, Edge)
 
 ## Architecture & Design
 
 ### Technology Stack
 - **Frontend**: Pure HTML5, CSS3, and vanilla JavaScript
-- **Styling**: CSS Grid, Flexbox, CSS Variables, and CSS Animations
-- **Fonts**: Google Fonts (Comic Neue, Fredoka One, Nunito)
-- **Icons**: Unicode emojis and symbols for kid-friendly design
+- **Styling**: CSS Grid, Flexbox, CSS Custom Properties, CSS Animations
+- **Fonts**: Google Fonts (Orbitron for display, Space Grotesk for body text)
+- **Icons**: Unicode emojis and space-themed symbols
 
-### Design System
-- **Primary Colors**: Electric Blue (#3b82f6), Sunshine Yellow (#fbbf24), Energetic Orange (#fb923c), Fresh Green (#22c55e)
-- **Secondary Colors**: Purple Magic (#8b5cf6), Pink Fun (#ec4899), Turquoise (#06b6d4)
-- **Typography**: Large, readable fonts with playful character
-- **Layout**: Mobile-first responsive design with interactive animations
+### Space Theme Design System
+- **Primary Colors**: Space Blue (#70A1D7), Cosmic Green (#A1DE93), Stellar Yellow (#F7F48B), Nebula Coral (#F47C7C)
+- **Background**: Dark space theme (#0B0D17) with starfield animations
+- **Typography**: Orbitron for headings (sci-fi), Space Grotesk for body text
+- **Layout**: Single-page application with smooth scrolling sections
 
-### Key Features
-1. **Interactive Navigation**: Hamburger menu with smooth transitions
-2. **Hero Section**: Animated avatar, floating shapes, and call-to-action buttons
-3. **Daily Features**: Brain busters, idiom of the day, science facts
-4. **Subject Cards**: Math, Science, Language Arts, Social Studies, AI, and Art
-5. **Sound Effects**: Button clicks, success sounds, and audio feedback
-6. **Animations**: CSS keyframes, hover effects, and scroll-based animations
-7. **Responsive Design**: Optimized for mobile, tablet, and desktop
+### Core Interactive Features
+1. **Custom Cursor**: Space-themed cursor with trail effect
+2. **Starfield Background**: Animated twinkling stars and cosmic particles
+3. **Floating Animations**: Planets, emojis, and space elements
+4. **Smooth Scrolling Navigation**: Section-based navigation with active states
+5. **Interactive Tabs System**: Multiple content areas within sections
+6. **Modal System**: Surprise modal with rotating fun facts
+7. **Guestbook**: Interactive message system
+8. **Easter Eggs**: Konami code and surprise unlocking system
 
-## Page-Specific Features
+## Website Structure
 
-### Homepage (index.html)
-- Animated hero section with floating shapes
-- Daily challenge widgets (brain buster, idiom, science fact)
-- Quick access cards to different sections
-- Animated statistics counter
-- Sound effects and interactive elements
+### Single Page Application (index.html)
+The main website is a single-page application with multiple sections:
 
-### About Me (about.html)
-- Customizable avatar with expressions, hat, and glasses
-- Interactive hobbies showcase (chess, cricket, YouTube, Rubik's cube)
-- Rotating fun facts carousel with touch gestures
-- Achievement gallery with celebration animations
-- Progress tracking for personal goals
+1. **Hero Section** (`#home`)
+   - Animated astronaut Dhruv with speech bubble
+   - Floating planets and cosmic particles
+   - Interactive buttons with hover effects
 
-### Learning Hub (learning.html)
-- Subject-based learning cards with interactive activities
-- Math Magic: Number tricks, times tables, fraction pizza, geometry builder
-- Science Spectacular: Periodic table, solar system, animal facts, weather station
-- Language Arts Lab: Story starters, idioms corner, grammar games
-- Daily learning challenge with brain teasers
-- Progress tracking across different subjects
+2. **About Section** (`#about`)
+   - Personal information cards with hover animations
+   - Subject pills (Math, Science, ELA, Gym, Music)
+   - Heroes showcase (Superman, Flash, Dad, RRR movie)
+
+3. **Interests Section** (`#interests`)
+   - Tabbed interface: Sports & Games, Reading Corner, Weekend Fun, Entertainment
+   - Featured cricket passion with special styling
+   - Book collection with Wings of Fire as favorite
+   - Game pills (Fortnite, Roblox, Minecraft)
+
+4. **Dreams Section** (`#dreams`)
+   - Mega dream: Becoming an elemental lion with cosmic powers
+   - Grid of future career dreams (cricket player, neurologist, space travel)
+   - Current goal with animated progress bar
+
+5. **Guestbook Section** (`#guestbook`)
+   - Interactive form for visitor messages
+   - Messages display with space explorer theme
+   - Real-time message addition with animations
+
+### Legacy Pages (pages/ directory)
+- `about.html` and `learning.html` are older versions with different styling
+- These use separate CSS files (`about.css`, `learning.css`) and JavaScript
+- Main focus should be on the single-page `index.html`
 
 ## JavaScript Architecture
 
-### Core Functionality (main.js)
-- Navigation menu toggle and smooth scrolling
-- Animation observers and intersection observers
-- Statistics counter animations
-- Sound effects system with audio management
-- Page transition effects and lazy loading
-- Mobile-responsive adjustments
+### Core Systems (main.js - 782 lines)
+1. **Navigation System**: Mobile hamburger menu, smooth scrolling, active link updates
+2. **Starfield Animation**: Dynamic star generation with random colors and twinkling
+3. **Custom Cursor**: Space-themed cursor with trail effect and hover interactions
+4. **Tabs System**: Interactive content switching in the interests section
+5. **Modal System**: Surprise modal with rotating fun facts carousel
+6. **Guestbook System**: Form handling and message display with animations
+7. **Scroll Effects**: Parallax scrolling and intersection observer animations
 
-### Interactive Features
-- **Avatar Customization**: Expression changing, accessory toggling
-- **Game Logic**: Chess pieces, cricket animation, Rubik's cube solver
-- **Educational Activities**: Math tricks, fraction visualization, story generation
-- **Progress Tracking**: Learning progress bars and achievement systems
+### Special Features
+- **Easter Eggs**: Konami code (↑↑↓↓←→←→BA) transforms astronaut into elemental lion
+- **Sound System**: Console-based sound effects (hover, click, tab, surprise, success)
+- **Notification System**: Animated toast notifications with space theme
+- **Performance**: Throttled scroll events and optimized animations
+
+### Key Interactive Elements
+- Power hover effects with rotation and scaling
+- Book card clicks show themed quotes
+- Sparkle effects on surprise activation
+- Elemental effects for Konami code easter egg
 
 ## CSS Architecture
 
-### Utility Classes
-- CSS Variables for consistent theming
-- Responsive breakpoints (768px, 480px)
-- Animation classes (fadeInUp, slideInLeft, bounce, etc.)
-- Component-based styling approach
+### Design System (main.css - 2010 lines)
+- **CSS Custom Properties**: Comprehensive design token system with colors, spacing, typography
+- **Component-Based**: Modular styling for cards, buttons, sections, and interactive elements
+- **Space Theme**: Dark backgrounds, glowing effects, and cosmic color palettes
+- **Responsive**: Mobile-first design with breakpoints at 480px, 768px, and 1600px+
 
-### Animation System
-- Keyframe animations for floating, bouncing, and rotating effects
-- Hover and click interactions with transform and scale effects
-- Scroll-based parallax animations
-- Loading and transition animations
+### Animation Framework
+- **Keyframe Animations**: 25+ custom animations (float, twinkle, bounce, orbit-spin, etc.)
+- **Hover Effects**: Transform, scale, and glow effects on interactive elements  
+- **Scroll Animations**: Parallax effects and intersection observer triggers
+- **Special Effects**: Sparkle, elemental, and shooting star animations
 
-## Content Strategy
+### Key CSS Features
+- Custom cursor implementation with pointer-events management
+- Starfield background with multiple animated layers
+- Advanced button effects with gradient backgrounds and shine animations
+- Complex card layouts with hover transformations and glow effects
 
-### Educational Value
-- Age-appropriate content for 4th-grade level (9-year-old)
-- Curriculum-aligned learning objectives
-- Progressive difficulty levels
-- Critical thinking puzzles and challenges
+## Content & Personality
 
-### Engagement Tactics
-- Immediate visual and audio feedback
-- Gamification with points and achievements
-- Social elements (safe guestbook, friend features)
-- Regular content updates and daily challenges
+### Dhruv's Profile
+- **Age**: 9 years old, 4th grade student from Michigan, USA
+- **Family**: Lives with dad, mom, and one sister
+- **Biggest Dream**: Becoming an elemental lion with cosmic powers (🦁⚡)
+- **Career Aspirations**: Professional cricket player or neurologist
+- **Favorite Book Series**: Wings of Fire (graphic novels)
+- **Games**: Fortnite, Roblox, Minecraft, chess, board games
+- **Heroes**: Superman, Flash, his dad, and RRR movie
 
-## Browser Compatibility
+### Content Themes
+- **Space Adventure**: Cosmic aesthetics with astronaut persona
+- **Personal Interests**: Cricket passion, reading, gaming, family
+- **Dreams & Goals**: Ambitious future plans and current progress
+- **Interactive Elements**: Guestbook for visitor engagement
+- **Safe Content**: Age-appropriate, family-friendly design
 
-- Modern browsers (Chrome, Firefox, Safari, Edge)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-- Graceful degradation for older browsers
-- Touch-friendly interactions for tablets and phones
+## Browser Compatibility & Performance
 
-## Future Enhancements
-
-### Planned Features
-1. **Quizzes & Challenges Arena**: Interactive quiz games with scoring
-2. **YouTube Channel Showcase**: Embedded videos from RoyalIQFun channel
-3. **Friends & Guestbook**: Safe social features for kids
-4. **More Learning Activities**: Expanded subject content and games
-5. **Progress Persistence**: Local storage for tracking achievements
-
-### Technical Improvements
-- Service worker for offline functionality
-- Progressive Web App (PWA) features
-- Performance optimization and code splitting
-- Accessibility enhancements (ARIA labels, keyboard navigation)
+- **Target Browsers**: Modern browsers (Chrome, Firefox, Safari, Edge)
+- **Mobile Support**: Responsive design with touch-friendly interactions
+- **Performance**: Throttled scroll events, optimized animations, minimal dependencies
+- **Accessibility**: Reduced motion support, keyboard navigation, semantic HTML
 
 ## Development Guidelines
 
-1. **Kid-Safe Design**: All content appropriate for elementary school students
-2. **Performance First**: Optimize images, minimize JavaScript, efficient animations
-3. **Accessibility**: High contrast, large buttons, screen reader support
-4. **Mobile-First**: Design for touch interactions and small screens
-5. **Educational Value**: Every feature should contribute to learning
-6. **Fun Factor**: Maintain playful, engaging, and colorful design
-7. **Safety**: No external links without parental controls, moderated content
+### Code Organization
+- **Single Source of Truth**: `index.html` is the main application
+- **Legacy Support**: Keep `pages/` directory for historical reference
+- **Component-Based CSS**: Use BEM-like methodology for class naming
+- **JavaScript Modules**: Organize functionality into logical sections
 
-## File Maintenance
+### Design Principles
+1. **Space Theme Consistency**: Maintain cosmic aesthetic across all elements
+2. **Interactive Feedback**: Provide visual/audio feedback for all interactions
+3. **Performance First**: Optimize animations and minimize reflows
+4. **Mobile-First**: Design for touch and small screens first
+5. **Kid-Safe**: All content appropriate for 9-year-old audience
 
-- Keep CSS organized by component and page
-- JavaScript functions should be well-documented with clear naming
-- Images should be optimized for web (WebP format when possible)
-- Regular testing across different devices and browsers
-- Update content regularly to maintain engagement
+### Content Guidelines
+- **Personal Voice**: Write from Dhruv's perspective with enthusiasm
+- **Age-Appropriate**: Content suitable for 4th-grade level
+- **Family-Friendly**: No external links without supervision
+- **Authentic**: Reflect genuine interests and personality

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhruv's Space Adventure - 4th Grade Explorer</title>
-    <meta name="description" content="Welcome to Dhruv's amazing space-themed website! Join me on adventures through cricket, books, and dreams of becoming an elemental lion!">
+    <title>About Me - Dhruv's Space Adventure</title>
+    <meta name="description" content="Get to know Dhruv - a 9-year-old space explorer from Michigan with big dreams!">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,23 +19,30 @@
 <body>
     <!-- Custom Cursor -->
     <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
     
-    <!-- Star trail system -->
-    <div class="star-trail star-1">⭐</div>
-    <div class="star-trail star-2">✨</div>
-    <div class="star-trail star-3">🌟</div>
-    <div class="star-trail star-4">⭐</div>
-    <div class="star-trail star-5">✨</div>
-    <div class="star-trail star-6">🌟</div>
-    <div class="star-trail star-7">⭐</div>
-    <div class="star-trail star-8">✨</div>
+    <!-- Rainbow Planet Cursor Follower -->
+    <div class="rainbow-planet" id="rainbowPlanet">
+        <div class="planet-core"></div>
+        <div class="planet-ring"></div>
+        <div class="planet-sparkles">
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+        </div>
+    </div>
     
+    <!-- Realistic Planet Cursor Follower -->
+    <div class="planet-follower" id="planetFollower">
+        <div class="planet-sphere">
+            <div class="planet-atmosphere"></div>
+            <div class="planet-clouds"></div>
+        </div>
+    </div>
     
+    <!-- Starfield Background -->
     <div class="starfield" id="starfield"></div>
-    
-    <!-- Enhanced Starry Night Background -->
-    <div class="starry-night-bg"></div>
-    
     
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -51,8 +58,8 @@
             </div>
             
             <div class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link active">🏠 Home</a>
-                <a href="about.html" class="nav-link">🚀 About Me</a>
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="about.html" class="nav-link active">🚀 About Me</a>
                 <a href="interests.html" class="nav-link">🎮 My World</a>
                 <a href="dreams.html" class="nav-link">⭐ Dreams</a>
                 <a href="guestbook.html" class="nav-link">📝 Guestbook</a>
@@ -79,44 +86,88 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section" id="home">
-            <div class="hero-bg">
-                <div class="floating-planets">
-                    <div class="planet planet-1">🪐</div>
-                    <div class="planet planet-2">🌍</div>
-                    <div class="planet planet-3">🌙</div>
+        <!-- About Me Section -->
+        <section class="about-section" id="about">
+            <div class="section-bg">
+                <div class="constellation-pattern"></div>
+                <div class="floating-emojis">
+                    <div class="emoji emoji-1">📚</div>
+                    <div class="emoji emoji-2">🏏</div>
+                    <div class="emoji emoji-3">🎮</div>
                 </div>
-                <div class="cosmic-particles"></div>
             </div>
             
             <div class="container">
-                <div class="hero-content">
-                    <div class="hero-greeting">
-                        <div class="greeting-animation">
-                            <span class="wave">👋</span>
-                            <h1 class="hero-title">
-                                Hi! I'm <span class="name-highlight">Dhruv</span>!
-                            </h1>
+                <div class="section-header">
+                    <h2 class="section-title">About This Space Explorer</h2>
+                    <p class="section-subtitle">Get to know the real me and what makes me tick! 🌟</p>
+                </div>
+                
+                <div class="about-grid">
+                    <div class="about-card main-card">
+                        <div class="card-header">
+                            <div class="card-icon">🚀</div>
+                            <h3>Mission Control</h3>
                         </div>
-                        <div class="hero-subtitle">
-                            <p class="age-info">🚀 9 years old • 4th Grade Explorer • Michigan, USA</p>
-                            <p class="fun-intro">Welcome to my space adventure! Ready to explore my universe? 🌟</p>
-                        </div>
-                        <div class="hero-actions">
-                            <a href="about.html" class="btn btn-primary">
-                                <span>Start Adventure</span>
-                                <span class="btn-rocket">🚀</span>
-                            </a>
-                            <button class="btn btn-secondary surprise-trigger" onclick="triggerSurprise()">
-                                <span>Surprise Me!</span>
-                                <span class="btn-sparkle">✨</span>
-                            </button>
+                        <div class="card-content">
+                            <p>I'm Dhruv (that's my nickname for Dhruvtej Nallamothu)! I live in Michigan with my family, and I'm super excited about starting 4th grade. My sister makes me laugh in the most unexpected ways! 😄</p>
+                            <div class="fun-facts">
+                                <div class="fact-item">
+                                    <span class="fact-icon">💙</span>
+                                    <span>Favorite Color: Blue</span>
+                                </div>
+                                <div class="fact-item">
+                                    <span class="fact-icon">🏠</span>
+                                    <span>From: Michigan, USA</span>
+                                </div>
+                                <div class="fact-item">
+                                    <span class="fact-icon">👨‍👩‍👧‍👦</span>
+                                    <span>Family: Dad, Mom & 1 awesome sister</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
+                    <div class="about-card school-card">
+                        <div class="card-header">
+                            <div class="card-icon">📚</div>
+                            <h3>School Universe</h3>
+                        </div>
+                        <div class="card-content">
+                            <p>Subjects I absolutely love:</p>
+                            <div class="subject-pills">
+                                <span class="pill math">🔢 Math</span>
+                                <span class="pill science">🧪 Science</span>
+                                <span class="pill ela">📖 ELA</span>
+                                <span class="pill gym">🏃‍♂️ Gym</span>
+                                <span class="pill music">🎵 Music</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-card hero-card">
+                        <div class="card-header">
+                            <div class="card-icon">🦸‍♂️</div>
+                            <h3>My Heroes</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="heroes-list">
+                                <div class="hero-item">
+                                    <span class="hero-icon">💪</span>
+                                    <span>Superman & Flash</span>
+                                </div>
+                                <div class="hero-item">
+                                    <span class="hero-icon">👨</span>
+                                    <span>My Dad (biggest hero!)</span>
+                                </div>
+                                <div class="hero-item">
+                                    <span class="hero-icon">🎬</span>
+                                    <span>RRR Movie</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
             </div>
         </section>
     </main>

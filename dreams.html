@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhruv's Space Adventure - 4th Grade Explorer</title>
-    <meta name="description" content="Welcome to Dhruv's amazing space-themed website! Join me on adventures through cricket, books, and dreams of becoming an elemental lion!">
+    <title>My Dreams - Dhruv's Space Adventure</title>
+    <meta name="description" content="Discover Dhruv's big dreams and goals - from becoming an elemental lion to exploring space!">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,23 +19,30 @@
 <body>
     <!-- Custom Cursor -->
     <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
     
-    <!-- Star trail system -->
-    <div class="star-trail star-1">⭐</div>
-    <div class="star-trail star-2">✨</div>
-    <div class="star-trail star-3">🌟</div>
-    <div class="star-trail star-4">⭐</div>
-    <div class="star-trail star-5">✨</div>
-    <div class="star-trail star-6">🌟</div>
-    <div class="star-trail star-7">⭐</div>
-    <div class="star-trail star-8">✨</div>
+    <!-- Rainbow Planet Cursor Follower -->
+    <div class="rainbow-planet" id="rainbowPlanet">
+        <div class="planet-core"></div>
+        <div class="planet-ring"></div>
+        <div class="planet-sparkles">
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+        </div>
+    </div>
     
+    <!-- Realistic Planet Cursor Follower -->
+    <div class="planet-follower" id="planetFollower">
+        <div class="planet-sphere">
+            <div class="planet-atmosphere"></div>
+            <div class="planet-clouds"></div>
+        </div>
+    </div>
     
+    <!-- Starfield Background -->
     <div class="starfield" id="starfield"></div>
-    
-    <!-- Enhanced Starry Night Background -->
-    <div class="starry-night-bg"></div>
-    
     
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -51,10 +58,10 @@
             </div>
             
             <div class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link active">🏠 Home</a>
+                <a href="index.html" class="nav-link">🏠 Home</a>
                 <a href="about.html" class="nav-link">🚀 About Me</a>
                 <a href="interests.html" class="nav-link">🎮 My World</a>
-                <a href="dreams.html" class="nav-link">⭐ Dreams</a>
+                <a href="dreams.html" class="nav-link active">⭐ Dreams</a>
                 <a href="guestbook.html" class="nav-link">📝 Guestbook</a>
             </div>
 
@@ -79,44 +86,88 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section" id="home">
-            <div class="hero-bg">
-                <div class="floating-planets">
-                    <div class="planet planet-1">🪐</div>
-                    <div class="planet planet-2">🌍</div>
-                    <div class="planet planet-3">🌙</div>
-                </div>
-                <div class="cosmic-particles"></div>
+        <!-- Dreams Section -->
+        <section class="dreams-section" id="dreams">
+            <div class="section-bg">
+                <div class="galaxy-bg"></div>
+                <div class="shooting-stars"></div>
             </div>
             
             <div class="container">
-                <div class="hero-content">
-                    <div class="hero-greeting">
-                        <div class="greeting-animation">
-                            <span class="wave">👋</span>
-                            <h1 class="hero-title">
-                                Hi! I'm <span class="name-highlight">Dhruv</span>!
-                            </h1>
-                        </div>
-                        <div class="hero-subtitle">
-                            <p class="age-info">🚀 9 years old • 4th Grade Explorer • Michigan, USA</p>
-                            <p class="fun-intro">Welcome to my space adventure! Ready to explore my universe? 🌟</p>
-                        </div>
-                        <div class="hero-actions">
-                            <a href="about.html" class="btn btn-primary">
-                                <span>Start Adventure</span>
-                                <span class="btn-rocket">🚀</span>
-                            </a>
-                            <button class="btn btn-secondary surprise-trigger" onclick="triggerSurprise()">
-                                <span>Surprise Me!</span>
-                                <span class="btn-sparkle">✨</span>
-                            </button>
+                <div class="section-header">
+                    <h2 class="section-title">My Big Dreams & Goals</h2>
+                    <p class="section-subtitle">Reach for the stars! Here's what I'm dreaming about! 🌟</p>
+                </div>
+                
+                <div class="dreams-timeline">
+                    <div class="dream-card mega-dream">
+                        <div class="dream-glow"></div>
+                        <div class="dream-icon">🦁</div>
+                        <div class="dream-content">
+                            <h3>Become an Elemental Lion!</h3>
+                            <p>This is my BIGGEST dream ever! An elemental lion with cosmic powers would be the coolest thing in the universe! 🌟</p>
+                            <div class="power-list">
+                                <span class="power">🔥 Fire</span>
+                                <span class="power">💧 Water</span>
+                                <span class="power">🌪️ Air</span>
+                                <span class="power">🌍 Earth</span>
+                                <span class="power">⚡ Lightning</span>
+                                <span class="power">🌌 Cosmic</span>
+                            </div>
                         </div>
                     </div>
                     
+                    <div class="dreams-grid">
+                        <div class="dream-card">
+                            <div class="dream-icon">🏏</div>
+                            <h3>Cricket Player</h3>
+                            <p>Play professional cricket and represent my team! 🏆</p>
+                        </div>
+                        
+                        <div class="dream-card">
+                            <div class="dream-icon">🧠</div>
+                            <h3>Neurologist</h3>
+                            <p>Or maybe become a doctor who studies brains - so cool! 🔬</p>
+                        </div>
+                        
+                        <div class="dream-card">
+                            <div class="dream-icon">🚀</div>
+                            <h3>Go to Space!</h3>
+                            <p>My dream field trip would be visiting space! 🌟</p>
+                        </div>
+                        
+                        <div class="dream-card">
+                            <div class="dream-icon">🏙️</div>
+                            <h3>Visit Hyderabad</h3>
+                            <p>Travel to Hyderabad, India and explore my heritage! 🇮🇳</p>
+                        </div>
+                        
+                        <div class="dream-card">
+                            <div class="dream-icon">🤖</div>
+                            <h3>Build a Robot</h3>
+                            <p>Create my own personal assistant robot! How awesome would that be? 🔧</p>
+                        </div>
+                        
+                        <div class="dream-card">
+                            <div class="dream-icon">🌍</div>
+                            <h3>Safe World</h3>
+                            <p>Help build a world where everyone is safe and happy! 💙</p>
+                        </div>
+                    </div>
+                    
+                    <div class="current-goal">
+                        <div class="goal-header">
+                            <h3>🎯 This Year's Mission</h3>
+                        </div>
+                        <div class="goal-content">
+                            <p>Finish 4th grade Khan Academy and become even smarter! 📚✨</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                                <span class="progress-text">In Progress...</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
             </div>
         </section>
     </main>

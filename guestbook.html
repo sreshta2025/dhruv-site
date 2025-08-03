@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhruv's Space Adventure - 4th Grade Explorer</title>
-    <meta name="description" content="Welcome to Dhruv's amazing space-themed website! Join me on adventures through cricket, books, and dreams of becoming an elemental lion!">
+    <title>Space Guestbook - Dhruv's Space Adventure</title>
+    <meta name="description" content="Leave Dhruv a message from your corner of the universe!">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,23 +19,30 @@
 <body>
     <!-- Custom Cursor -->
     <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
     
-    <!-- Star trail system -->
-    <div class="star-trail star-1">⭐</div>
-    <div class="star-trail star-2">✨</div>
-    <div class="star-trail star-3">🌟</div>
-    <div class="star-trail star-4">⭐</div>
-    <div class="star-trail star-5">✨</div>
-    <div class="star-trail star-6">🌟</div>
-    <div class="star-trail star-7">⭐</div>
-    <div class="star-trail star-8">✨</div>
+    <!-- Rainbow Planet Cursor Follower -->
+    <div class="rainbow-planet" id="rainbowPlanet">
+        <div class="planet-core"></div>
+        <div class="planet-ring"></div>
+        <div class="planet-sparkles">
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+        </div>
+    </div>
     
+    <!-- Realistic Planet Cursor Follower -->
+    <div class="planet-follower" id="planetFollower">
+        <div class="planet-sphere">
+            <div class="planet-atmosphere"></div>
+            <div class="planet-clouds"></div>
+        </div>
+    </div>
     
+    <!-- Starfield Background -->
     <div class="starfield" id="starfield"></div>
-    
-    <!-- Enhanced Starry Night Background -->
-    <div class="starry-night-bg"></div>
-    
     
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -51,11 +58,11 @@
             </div>
             
             <div class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link active">🏠 Home</a>
+                <a href="index.html" class="nav-link">🏠 Home</a>
                 <a href="about.html" class="nav-link">🚀 About Me</a>
                 <a href="interests.html" class="nav-link">🎮 My World</a>
                 <a href="dreams.html" class="nav-link">⭐ Dreams</a>
-                <a href="guestbook.html" class="nav-link">📝 Guestbook</a>
+                <a href="guestbook.html" class="nav-link active">📝 Guestbook</a>
             </div>
 
             <div class="nav-controls">
@@ -79,44 +86,54 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section" id="home">
-            <div class="hero-bg">
-                <div class="floating-planets">
-                    <div class="planet planet-1">🪐</div>
-                    <div class="planet planet-2">🌍</div>
-                    <div class="planet planet-3">🌙</div>
-                </div>
-                <div class="cosmic-particles"></div>
-            </div>
-            
+        <!-- Guestbook Section -->
+        <section class="guestbook-section" id="guestbook">
             <div class="container">
-                <div class="hero-content">
-                    <div class="hero-greeting">
-                        <div class="greeting-animation">
-                            <span class="wave">👋</span>
-                            <h1 class="hero-title">
-                                Hi! I'm <span class="name-highlight">Dhruv</span>!
-                            </h1>
-                        </div>
-                        <div class="hero-subtitle">
-                            <p class="age-info">🚀 9 years old • 4th Grade Explorer • Michigan, USA</p>
-                            <p class="fun-intro">Welcome to my space adventure! Ready to explore my universe? 🌟</p>
-                        </div>
-                        <div class="hero-actions">
-                            <a href="about.html" class="btn btn-primary">
-                                <span>Start Adventure</span>
-                                <span class="btn-rocket">🚀</span>
-                            </a>
-                            <button class="btn btn-secondary surprise-trigger" onclick="triggerSurprise()">
-                                <span>Surprise Me!</span>
-                                <span class="btn-sparkle">✨</span>
-                            </button>
-                        </div>
-                    </div>
-                    
+                <div class="section-header">
+                    <h2 class="section-title">Space Guestbook</h2>
+                    <p class="section-subtitle">Leave me a message from your corner of the universe! 🌌</p>
                 </div>
                 
+                <div class="guestbook-container">
+                    <div class="guestbook-form">
+                        <form id="guestbookForm">
+                            <div class="form-group">
+                                <label for="visitorName">Your Name (fellow explorer!)</label>
+                                <input type="text" id="visitorName" name="name" placeholder="What should I call you?" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="visitorMessage">Your Space Message</label>
+                                <textarea id="visitorMessage" name="message" placeholder="Say hi, ask me about cricket, or tell me about your favorite book!" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="visitorPlanet">Your Home Planet</label>
+                                <input type="text" id="visitorPlanet" name="planet" placeholder="Earth? Mars? Somewhere cooler?">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <span>Send to Space Station</span>
+                                <span class="btn-rocket">🚀</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="messages-display">
+                        <h3>Messages from Space Explorers</h3>
+                        <div class="messages-container" id="messagesContainer">
+                            <div class="message-card sample">
+                                <div class="message-header">
+                                    <span class="visitor-name">🚀 Space Captain Alex</span>
+                                    <span class="visitor-planet">From: Planet Awesome</span>
+                                </div>
+                                <div class="message-content">
+                                    "Hey Dhruv! Your website is so cool! I love cricket too and Wings of Fire is amazing! Keep being awesome! 🌟"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>

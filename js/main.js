@@ -8,12 +8,14 @@ let currentFactIndex = 0;
 let factRotationInterval;
 let musicEnabled = false;
 let surpriseUnlocked = false;
+let currentTheme = 'dark'; // Track current theme: 'dark', 'earth', 'countryside'
 
 // Initialize everything when DOM loads
 document.addEventListener('DOMContentLoaded', function() {
     initializeNavigation();
     initializeStarfield();
     initializeCursor();
+    initializeDarkMode();
     initializeInteractions();
     initializeTabs();
     initializeModal();
@@ -54,50 +56,53 @@ function initializeNavigation() {
         });
     }
     
-    // Smooth scrolling for navigation links
+    // Handle navigation links (now they point to separate pages)
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
+            const href = this.getAttribute('href');
             
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            // If it's a hash link (same page), handle scrolling
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(targetId);
                 
-                // Update active link
-                navLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Close mobile menu
-                navMenu.classList.remove('active');
-                mobileToggle.classList.remove('active');
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Update active link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
             }
+            
+            // Close mobile menu for all navigation
+            navMenu.classList.remove('active');
+            mobileToggle.classList.remove('active');
         });
     });
     
-    // Update active nav link on scroll
+    // Update active nav link on page load and scroll
+    updateActiveNavLink();
     window.addEventListener('scroll', updateActiveNavLink);
 }
 
 function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section');
+    // For separate pages, set active link based on current page
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-link');
-    let currentSection = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-            currentSection = section.getAttribute('id');
-        }
-    });
     
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
+        const linkHref = link.getAttribute('href');
+        
+        // Handle different cases
+        if ((currentPage === 'index.html' || currentPage === '') && linkHref === 'index.html') {
+            link.classList.add('active');
+        } else if (linkHref === currentPage) {
             link.classList.add('active');
         }
     });
@@ -139,19 +144,25 @@ function getRandomStarColor() {
 // ===== CUSTOM CURSOR =====
 function initializeCursor() {
     const cursor = document.querySelector('.custom-cursor');
-    const cursorTrail = document.querySelector('.cursor-trail');
+    const starTrails = document.querySelectorAll('.star-trail');
     
-    if (!cursor || !cursorTrail) {
+    if (!cursor) {
         console.log('Custom cursor elements not found, using default cursor');
         return;
     }
     
     let mouseX = 0, mouseY = 0;
-    let trailX = 0, trailY = 0;
+    
+    // Star trail positions array
+    const starPositions = Array.from(starTrails).map(() => ({ x: 0, y: 0 }));
     
     // Show cursors initially
     cursor.style.opacity = '1';
-    cursorTrail.style.opacity = '0.8';
+    
+    // Initialize star trails
+    starTrails.forEach(star => {
+        star.style.opacity = '1';
+    });
     
     // Hide default cursor only if custom cursor is working
     document.body.style.cursor = 'none';
@@ -163,31 +174,48 @@ function initializeCursor() {
         cursor.style.left = mouseX + 'px';
         cursor.style.top = mouseY + 'px';
         cursor.style.opacity = '1';
+        
+        // Initialize star positions on first mouse move if not already set
+        starPositions.forEach((pos, index) => {
+            if (pos.x === 0 && pos.y === 0) {
+                pos.x = mouseX;
+                pos.y = mouseY;
+            }
+        });
     });
     
     // Hide cursor when mouse leaves window
     document.addEventListener('mouseleave', () => {
         cursor.style.opacity = '0';
-        cursorTrail.style.opacity = '0';
+        starTrails.forEach(star => {
+            star.style.opacity = '0';
+        });
     });
     
     // Show cursor when mouse enters window
     document.addEventListener('mouseenter', () => {
         cursor.style.opacity = '1';
-        cursorTrail.style.opacity = '0.8';
+        starTrails.forEach(star => {
+            star.style.opacity = '1';
+        });
     });
     
-    // Smooth trail animation
-    function animateTrail() {
-        trailX += (mouseX - trailX) * 0.15;
-        trailY += (mouseY - trailY) * 0.15;
+    // Smooth star animation
+    function animateFollowers() {
         
-        cursorTrail.style.left = trailX + 'px';
-        cursorTrail.style.top = trailY + 'px';
+        // Animate star trails with different delays
+        starTrails.forEach((star, index) => {
+            const delay = 0.03 + (index * 0.02); // Different follow speeds
+            starPositions[index].x += (mouseX - starPositions[index].x) * delay;
+            starPositions[index].y += (mouseY - starPositions[index].y) * delay;
+            
+            star.style.left = starPositions[index].x + 'px';
+            star.style.top = starPositions[index].y + 'px';
+        });
         
-        requestAnimationFrame(animateTrail);
+        requestAnimationFrame(animateFollowers);
     }
-    animateTrail();
+    animateFollowers();
     
     // Cursor interactions
     const interactiveElements = document.querySelectorAll('button, a, .about-card, .interest-card, .dream-card, .pill, .power, .book-card, .weekend-card');
@@ -206,11 +234,87 @@ function initializeCursor() {
         });
     });
     
-    console.log('✨ Custom cursor initialized!');
+    // Click effect for both planets
+    document.addEventListener('click', (e) => {
+        if (rainbowPlanet) {
+            // Create a burst effect on click
+            rainbowPlanet.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            rainbowPlanet.style.filter = 'brightness(1.5) drop-shadow(0 0 25px rgba(255, 255, 255, 0.8))';
+            
+            // Reset after animation
+            setTimeout(() => {
+                rainbowPlanet.style.transform = 'translate(-50%, -50%) scale(1)';
+                rainbowPlanet.style.filter = 'brightness(1) drop-shadow(0 0 0px transparent)';
+            }, 200);
+        }
+        
+        if (planetFollower) {
+            // Create pulse effect for realistic planet
+            planetFollower.style.transform = 'translate(-50%, -50%) scale(1.4)';
+            planetFollower.style.filter = 'brightness(1.4) drop-shadow(0 0 30px rgba(66, 165, 245, 0.9))';
+            
+            // Reset after animation
+            setTimeout(() => {
+                planetFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+                planetFollower.style.filter = 'brightness(1) drop-shadow(0 0 0px transparent)';
+            }, 250);
+        }
+        
+        // Create sparkle burst at click location
+        createSparklesAtPosition(e.clientX, e.clientY);
+    });
+    
+    console.log(`✨ Custom cursor initialized with ${starTrails.length} star trails!`);
+}
+
+// Create sparkles at specific position (for click effects)
+function createSparklesAtPosition(x, y) {
+    const sparkleEmojis = ['✨', '⭐', '🌟', '💫', '🎆', '💥'];
+    
+    for (let i = 0; i < 8; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+        sparkle.style.position = 'fixed';
+        sparkle.style.left = x + 'px';
+        sparkle.style.top = y + 'px';
+        sparkle.style.fontSize = '1.5rem';
+        sparkle.style.pointerEvents = 'none';
+        sparkle.style.zIndex = '9999';
+        sparkle.style.transform = 'translate(-50%, -50%)';
+        
+        // Random direction and distance for burst effect
+        const angle = (Math.PI * 2 * i) / 8;
+        const distance = Math.random() * 100 + 50;
+        const endX = x + Math.cos(angle) * distance;
+        const endY = y + Math.sin(angle) * distance;
+        
+        sparkle.style.animation = `sparkle-burst 0.8s ease-out forwards`;
+        sparkle.style.setProperty('--end-x', endX + 'px');
+        sparkle.style.setProperty('--end-y', endY + 'px');
+        
+        document.body.appendChild(sparkle);
+        
+        setTimeout(() => {
+            sparkle.remove();
+        }, 800);
+    }
 }
 
 // ===== INTERACTIVE ELEMENTS =====
 function initializeInteractions() {
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    console.log('🌙 Dark mode toggle element:', darkModeToggle);
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+            console.log('🌙 Button clicked!');
+            toggleDarkMode();
+        });
+        console.log('🌙 Dark mode event listener added!');
+    } else {
+        console.error('❌ Dark mode toggle button not found!');
+    }
+    
     // Music toggle
     const musicToggle = document.getElementById('musicToggle');
     if (musicToggle) {
@@ -274,6 +378,160 @@ function stopBackgroundMusic() {
     console.log('🔇 Music stopped');
 }
 
+// ===== THEME SYSTEM =====
+function initializeDarkMode() {
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('currentTheme') || 'dark';
+    currentTheme = savedTheme;
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateDarkModeIcon();
+}
+
+function toggleDarkMode() {
+    console.log('🌙 toggleDarkMode called! Current theme:', currentTheme);
+    const darkModeIcon = document.querySelector('.dark-mode-icon');
+    
+    // Cycle through themes: dark → earth → countryside → dark
+    if (currentTheme === 'dark') {
+        currentTheme = 'earth';
+        document.documentElement.setAttribute('data-theme', 'earth');
+        if (darkModeIcon) darkModeIcon.textContent = '☀️';
+        showNotification('☀️ Welcome to the sunny side! 🌍');
+        triggerSunRise();
+    } else if (currentTheme === 'earth') {
+        currentTheme = 'countryside';
+        document.documentElement.setAttribute('data-theme', 'countryside');
+        if (darkModeIcon) darkModeIcon.textContent = '🏙️';
+        showNotification('🏙️ Peaceful city night! 🌃');
+        triggerCityEffect();
+    } else {
+        currentTheme = 'dark';
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (darkModeIcon) darkModeIcon.textContent = '🌙';
+        showNotification('🌙 Back to space exploration! 🌌');
+    }
+    
+    localStorage.setItem('currentTheme', currentTheme);
+    console.log('🌙 Switched to theme:', currentTheme);
+    playSound('tab');
+}
+
+function updateDarkModeIcon() {
+    const darkModeIcon = document.querySelector('.dark-mode-icon');
+    if (darkModeIcon) {
+        if (currentTheme === 'dark') {
+            darkModeIcon.textContent = '🌙';
+        } else if (currentTheme === 'earth') {
+            darkModeIcon.textContent = '☀️';
+        } else if (currentTheme === 'countryside') {
+            darkModeIcon.textContent = '🏙️';
+        }
+    }
+}
+
+function triggerSunRise() {
+    // Create sun rising animation
+    const sun = document.createElement('div');
+    sun.className = 'rising-sun';
+    sun.innerHTML = '☀️';
+    sun.style.cssText = `
+        position: fixed;
+        font-size: 4rem;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10000;
+        pointer-events: none;
+        animation: sun-rising 3s ease-out forwards;
+    `;
+    
+    document.body.appendChild(sun);
+    
+    // Remove sun after animation
+    setTimeout(() => {
+        sun.remove();
+    }, 3000);
+    
+    // Add sun rays effect
+    setTimeout(() => {
+        createSunRays();
+    }, 2800);
+}
+
+function createSunRays() {
+    const rayParticles = ['✨', '🌟', '💫'];
+    
+    for (let i = 0; i < 8; i++) {
+        const ray = document.createElement('div');
+        ray.textContent = rayParticles[Math.floor(Math.random() * rayParticles.length)];
+        ray.style.position = 'fixed';
+        ray.style.fontSize = '2rem';
+        ray.style.top = '50%';
+        ray.style.left = '50%';
+        ray.style.pointerEvents = 'none';
+        ray.style.zIndex = '9999';
+        ray.style.transform = `translate(-50%, -50%) rotate(${i * 45}deg) translateY(-100px)`;
+        ray.style.animation = `sun-rays 2s ease-out forwards`;
+        ray.style.animationDelay = (i * 0.1) + 's';
+        
+        document.body.appendChild(ray);
+        
+        setTimeout(() => {
+            ray.remove();
+        }, 2500);
+    }
+}
+
+function triggerCityEffect() {
+    // Create city atmosphere effects with floating particles
+    const cityParticles = ['✨', '💫', '🌟', '⭐'];
+    
+    for (let i = 0; i < 8; i++) {
+        const particle = document.createElement('div');
+        particle.textContent = cityParticles[Math.floor(Math.random() * cityParticles.length)];
+        particle.style.cssText = `
+            position: fixed;
+            font-size: 1.2rem;
+            left: ${Math.random() * 100}%;
+            top: ${20 + Math.random() * 40}%;
+            pointer-events: none;
+            z-index: 9999;
+            color: #60A5FA;
+            animation: city-atmosphere 5s ease-in-out infinite;
+            animation-delay: ${Math.random() * 2}s;
+        `;
+        
+        document.body.appendChild(particle);
+        
+        setTimeout(() => {
+            particle.remove();
+        }, 5000);
+    }
+    
+    // Add some warm window light effects
+    for (let i = 0; i < 6; i++) {
+        const light = document.createElement('div');
+        light.textContent = '💡';
+        light.style.cssText = `
+            position: fixed;
+            font-size: 1rem;
+            left: ${10 + Math.random() * 80}%;
+            bottom: ${30 + Math.random() * 20}%;
+            pointer-events: none;
+            z-index: 9998;
+            color: #FFC107;
+            animation: city-lights-flicker 3s ease-in-out infinite;
+            animation-delay: ${Math.random() * 1}s;
+        `;
+        
+        document.body.appendChild(light);
+        
+        setTimeout(() => {
+            light.remove();
+        }, 3000);
+    }
+}
+
 function triggerSurprise() {
     if (!surpriseUnlocked) {
         showNotification('🚀 Surprise not unlocked yet! Explore more...');
@@ -323,6 +581,49 @@ const sparkleCSS = `
     100% { 
         opacity: 0; 
         transform: translateY(200px) rotate(360deg) scale(0.5); 
+    }
+}
+
+@keyframes sparkle-burst {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(var(--end-x) - 50%), calc(var(--end-y) - 50%)) scale(0.3) rotate(720deg);
+    }
+}
+
+@keyframes rocket-landing {
+    0% {
+        top: -100px;
+        transform: translateX(-50%) rotate(0deg);
+        opacity: 1;
+    }
+    80% {
+        top: calc(100vh - 150px);
+        transform: translateX(-50%) rotate(10deg);
+    }
+    100% {
+        top: calc(100vh - 120px);
+        transform: translateX(-50%) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes dust-cloud {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-30px) scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-60px) scale(0.8);
     }
 }`;
 
@@ -662,6 +963,13 @@ window.toggleMusic = function() {
     }
 };
 
+window.toggleDarkMode = function() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        darkModeToggle.click();
+    }
+};
+
 // ===== EASTER EGGS & SPECIAL EFFECTS =====
 
 // Konami Code Easter Egg
@@ -688,20 +996,6 @@ document.addEventListener('keydown', (e) => {
 function triggerKonamiEasterEgg() {
     showNotification('🎮 KONAMI CODE ACTIVATED! You found the secret! 🦁⚡');
     
-    // Turn Dhruv into a temporary elemental lion
-    const astronaut = document.querySelector('.astronaut-body');
-    if (astronaut) {
-        const originalContent = astronaut.textContent;
-        astronaut.textContent = '🦁⚡';
-        astronaut.style.fontSize = '10rem';
-        astronaut.style.animation = 'dream-bounce 0.5s ease-in-out infinite';
-        
-        setTimeout(() => {
-            astronaut.textContent = originalContent;
-            astronaut.style.fontSize = '8rem';
-            astronaut.style.animation = 'gentle-float 4s ease-in-out infinite';
-        }, 5000);
-    }
     
     // Add special effects
     createElementalEffects();
@@ -774,9 +1068,35 @@ console.log('🚀 Dhruv\'s Space Adventure - All systems online! 🌟');
 console.log('💡 Try the Konami Code for a special surprise! ↑↑↓↓←→←→BA');
 console.log('🎵 Click the music button to enable space tunes!');
 console.log('✨ Click the surprise button after 5 seconds for fun facts!');
+console.log('🌙 Dark mode toggle should be working now!');
+
+// Test function for debugging
+window.testDarkMode = function() {
+    console.log('🧪 Testing dark mode...');
+    const button = document.getElementById('darkModeToggle');
+    console.log('Button element:', button);
+    if (button) {
+        console.log('Clicking button...');
+        button.click();
+    } else {
+        console.error('Button not found!');
+    }
+};
 
 // Add a fun loading message
+
+// Debug function to test city theme
+window.testCity = function() {
+    console.log('🏙️ Testing city night theme...');
+    document.documentElement.setAttribute('data-theme', 'countryside');
+    console.log('Applied city night theme');
+};
+
+window.getCurrentTheme = function() {
+    return document.documentElement.getAttribute('data-theme');
+};
 if (document.readyState === 'loading') {
     console.log('🌌 Loading space adventure...');
 } else {
     console.log('🎯 Space adventure ready to explore!');
+}
