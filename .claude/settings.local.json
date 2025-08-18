@@ -7,8 +7,16 @@
       "Bash(python:*)",
       "Bash(node:*)",
       "Bash(start index.html)",
-      "Bash(start:*)"
+      "Bash(start:*)",
+      "Bash(grep:*)",
+      "Bash(rm:*)",
+      "WebSearch"
     ],
-    "deny": []
+    "deny": [],
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": [
+      "C:\\c\\Code",
+      "C:\\Code\\sreshta-site"
+    ]
   }
 }

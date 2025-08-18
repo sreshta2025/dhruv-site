@@ -1,7 +1,34 @@
 // About page specific JavaScript functionality
+console.log('About.js file loaded!');
+alert('About.js is loading...');
+
+// Simple test function
+window.testChess = function() {
+    alert('Test function called!');
+    console.log('Test function executed');
+    
+    // Try to call the actual chess function
+    try {
+        if (typeof window.openChessGame === 'function') {
+            alert('openChessGame function exists, calling it...');
+            window.openChessGame();
+        } else {
+            alert('openChessGame function does not exist!');
+        }
+    } catch (e) {
+        alert('Error calling chess function: ' + e.message);
+    }
+};
 
 let currentFactIndex = 0;
 const totalFacts = 5;
+
+// Chess game variables
+let chessBoard = [];
+let selectedSquare = null;
+let currentPlayer = 'white';
+let gameHistory = [];
+let isGameActive = true;
 
 // Avatar customization
 const expressions = ['😊', '😄', '🤔', '😎', '🤗', '😇', '🧠', '🎯'];
@@ -435,3 +462,391 @@ goalParticleStyle.textContent = `
     }
 `;
 document.head.appendChild(goalParticleStyle);
+
+// ===== CHESS GAME FUNCTIONALITY =====
+
+// Make sure the function is globally available
+window.openChessGame = function() {
+    console.log('Chess game opening from window...');
+    alert('Chess game starting from window!');
+    
+    // Basic fallback test
+    if (typeof document === 'undefined') {
+        alert('Document not available!');
+        return;
+    }
+    
+    const modal = document.getElementById('chessGameModal');
+    if (!modal) {
+        console.error('Chess modal not found!');
+        alert('Chess modal not found! ID: chessGameModal');
+        
+        // Let's try to find any modal
+        const allModals = document.querySelectorAll('[id*="chess"]');
+        console.log('Found chess elements:', allModals.length);
+        allModals.forEach(el => console.log('Element:', el.id, el.tagName));
+        return;
+    }
+    
+    console.log('Modal found, showing...');
+    modal.style.display = 'block';
+    
+    try {
+        initializeChessBoard();
+        renderChessBoard();
+        updateGameStatus("Your turn! Click a white piece to move.");
+        currentPlayer = 'white';
+        isGameActive = true;
+    } catch (e) {
+        console.error('Chess initialization error:', e);
+        alert('Chess initialization error: ' + e.message);
+    }
+    
+    try {
+        playSound('click');
+    } catch (e) {
+        console.log('playSound error:', e);
+    }
+};
+
+// Chess piece definitions
+const pieces = {
+    'white': {
+        'king': '♔', 'queen': '♕', 'rook': '♖', 'bishop': '♗', 'knight': '♘', 'pawn': '♙'
+    },
+    'black': {
+        'king': '♚', 'queen': '♛', 'rook': '♜', 'bishop': '♝', 'knight': '♞', 'pawn': '♟'
+    }
+};
+
+// Initialize chess board
+function initializeChessBoard() {
+    chessBoard = [
+        ['♜','♞','♝','♛','♚','♝','♞','♜'],
+        ['♟','♟','♟','♟','♟','♟','♟','♟'],
+        [null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,null],
+        ['♙','♙','♙','♙','♙','♙','♙','♙'],
+        ['♖','♘','♗','♕','♔','♗','♘','♖']
+    ];
+}
+
+// Open chess game modal
+function openChessGame() {
+    console.log('Chess game opening...');
+    alert('Chess game starting!'); // Temporary debug alert
+    const modal = document.getElementById('chessGameModal');
+    if (!modal) {
+        console.error('Chess modal not found!');
+        alert('Chess modal not found!');
+        return;
+    }
+    modal.style.display = 'block';
+    initializeChessBoard();
+    renderChessBoard();
+    updateGameStatus("Your turn! Click a white piece to move.");
+    currentPlayer = 'white';
+    isGameActive = true;
+    try {
+        playSound('click');
+    } catch (e) {
+        console.log('playSound error:', e);
+    }
+}
+
+// Close chess game modal
+window.closeChessGame = function() {
+    const modal = document.getElementById('chessGameModal');
+    modal.style.display = 'none';
+    try {
+        playSound('click');
+    } catch (e) {
+        console.log('playSound error:', e);
+    }
+};
+
+// Render the chess board
+function renderChessBoard() {
+    const boardElement = document.getElementById('gameChessBoard');
+    boardElement.innerHTML = '';
+    
+    for (let row = 0; row < 8; row++) {
+        for (let col = 0; col < 8; col++) {
+            const square = document.createElement('div');
+            square.className = `chess-square ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+            square.dataset.row = row;
+            square.dataset.col = col;
+            square.onclick = () => handleSquareClick(row, col);
+            
+            if (chessBoard[row][col]) {
+                const piece = document.createElement('div');
+                piece.className = 'chess-piece-game';
+                piece.textContent = chessBoard[row][col];
+                square.appendChild(piece);
+            }
+            
+            boardElement.appendChild(square);
+        }
+    }
+}
+
+// Handle square clicks
+function handleSquareClick(row, col) {
+    if (!isGameActive || currentPlayer !== 'white') return;
+    
+    const piece = chessBoard[row][col];
+    
+    if (selectedSquare) {
+        // Try to move piece
+        if (isValidMove(selectedSquare.row, selectedSquare.col, row, col)) {
+            makeMove(selectedSquare.row, selectedSquare.col, row, col);
+            selectedSquare = null;
+            clearHighlights();
+            
+            if (currentPlayer === 'black') {
+                setTimeout(() => makeAIMove(), 500);
+            }
+        } else {
+            // Select new piece or deselect
+            selectedSquare = null;
+            clearHighlights();
+            if (piece && isPieceWhite(piece)) {
+                selectSquare(row, col);
+            }
+        }
+    } else {
+        // Select piece
+        if (piece && isPieceWhite(piece)) {
+            selectSquare(row, col);
+        }
+    }
+}
+
+// Select a square
+function selectSquare(row, col) {
+    selectedSquare = { row, col };
+    const square = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+    square.classList.add('selected');
+    playSound('hover');
+}
+
+// Clear highlights
+function clearHighlights() {
+    document.querySelectorAll('.chess-square').forEach(square => {
+        square.classList.remove('selected', 'valid-move');
+    });
+}
+
+// Check if piece is white
+function isPieceWhite(piece) {
+    return '♔♕♖♗♘♙'.includes(piece);
+}
+
+// Check if piece is black
+function isPieceBlack(piece) {
+    return '♚♛♜♝♞♟'.includes(piece);
+}
+
+// Basic move validation
+function isValidMove(fromRow, fromCol, toRow, toCol) {
+    if (toRow < 0 || toRow > 7 || toCol < 0 || toCol > 7) return false;
+    if (fromRow === toRow && fromCol === toCol) return false;
+    
+    const piece = chessBoard[fromRow][fromCol];
+    const target = chessBoard[toRow][toCol];
+    
+    // Can't capture own piece
+    if (target && isPieceWhite(piece) === isPieceWhite(target)) return false;
+    
+    // Basic piece movement (simplified)
+    const rowDiff = Math.abs(toRow - fromRow);
+    const colDiff = Math.abs(toCol - fromCol);
+    
+    if (piece === '♙') { // White pawn
+        if (fromCol === toCol) {
+            if (fromRow === 6 && toRow === 4 && !target && !chessBoard[5][toCol]) return true;
+            if (toRow === fromRow - 1 && !target) return true;
+        } else if (colDiff === 1 && toRow === fromRow - 1 && target && isPieceBlack(target)) {
+            return true;
+        }
+    } else if (piece === '♟') { // Black pawn
+        if (fromCol === toCol) {
+            if (fromRow === 1 && toRow === 3 && !target && !chessBoard[2][toCol]) return true;
+            if (toRow === fromRow + 1 && !target) return true;
+        } else if (colDiff === 1 && toRow === fromRow + 1 && target && isPieceWhite(target)) {
+            return true;
+        }
+    } else if ('♖♜'.includes(piece)) { // Rook
+        return (rowDiff === 0 || colDiff === 0) && isPathClear(fromRow, fromCol, toRow, toCol);
+    } else if ('♗♝'.includes(piece)) { // Bishop
+        return rowDiff === colDiff && isPathClear(fromRow, fromCol, toRow, toCol);
+    } else if ('♕♛'.includes(piece)) { // Queen
+        return (rowDiff === 0 || colDiff === 0 || rowDiff === colDiff) && isPathClear(fromRow, fromCol, toRow, toCol);
+    } else if ('♔♚'.includes(piece)) { // King
+        return rowDiff <= 1 && colDiff <= 1;
+    } else if ('♘♞'.includes(piece)) { // Knight
+        return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
+    }
+    
+    return false;
+}
+
+// Check if path is clear for sliding pieces
+function isPathClear(fromRow, fromCol, toRow, toCol) {
+    const rowStep = toRow > fromRow ? 1 : toRow < fromRow ? -1 : 0;
+    const colStep = toCol > fromCol ? 1 : toCol < fromCol ? -1 : 0;
+    
+    let row = fromRow + rowStep;
+    let col = fromCol + colStep;
+    
+    while (row !== toRow || col !== toCol) {
+        if (chessBoard[row][col]) return false;
+        row += rowStep;
+        col += colStep;
+    }
+    
+    return true;
+}
+
+// Make a move
+function makeMove(fromRow, fromCol, toRow, toCol) {
+    const piece = chessBoard[fromRow][fromCol];
+    const captured = chessBoard[toRow][toCol];
+    
+    chessBoard[toRow][toCol] = piece;
+    chessBoard[fromRow][fromCol] = null;
+    
+    renderChessBoard();
+    
+    currentPlayer = currentPlayer === 'white' ? 'black' : 'white';
+    
+    if (captured) {
+        playSound('success');
+        updateGameStatus(captured ? `Captured ${captured}! ` : '' + (currentPlayer === 'white' ? "Your turn!" : "AI is thinking..."));
+    } else {
+        playSound('click');
+        updateGameStatus(currentPlayer === 'white' ? "Your turn!" : "AI is thinking...");
+    }
+}
+
+// Simple AI move
+function makeAIMove() {
+    if (!isGameActive || currentPlayer !== 'black') return;
+    
+    const possibleMoves = [];
+    
+    // Find all possible AI moves
+    for (let fromRow = 0; fromRow < 8; fromRow++) {
+        for (let fromCol = 0; fromCol < 8; fromCol++) {
+            const piece = chessBoard[fromRow][fromCol];
+            if (piece && isPieceBlack(piece)) {
+                for (let toRow = 0; toRow < 8; toRow++) {
+                    for (let toCol = 0; toCol < 8; toCol++) {
+                        if (isValidMove(fromRow, fromCol, toRow, toCol)) {
+                            const moveValue = evaluateMove(fromRow, fromCol, toRow, toCol);
+                            possibleMoves.push({
+                                from: { row: fromRow, col: fromCol },
+                                to: { row: toRow, col: toCol },
+                                value: moveValue
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    if (possibleMoves.length > 0) {
+        // Sort by move value and pick the best one
+        possibleMoves.sort((a, b) => b.value - a.value);
+        const bestMove = possibleMoves[0];
+        
+        makeMove(bestMove.from.row, bestMove.from.col, bestMove.to.row, bestMove.to.col);
+    } else {
+        updateGameStatus("Game Over! No valid moves for AI.");
+        isGameActive = false;
+    }
+}
+
+// Evaluate move value for AI
+function evaluateMove(fromRow, fromCol, toRow, toCol) {
+    const target = chessBoard[toRow][toCol];
+    let value = Math.random() * 10; // Add some randomness
+    
+    // Prioritize captures
+    if (target) {
+        const pieceValues = { '♙': 1, '♘': 3, '♗': 3, '♖': 5, '♕': 9, '♔': 100 };
+        value += pieceValues[target] || 1;
+    }
+    
+    // Prefer center control
+    if (toRow >= 2 && toRow <= 5 && toCol >= 2 && toCol <= 5) {
+        value += 2;
+    }
+    
+    return value;
+}
+
+// Start new game
+window.newGame = function() {
+    initializeChessBoard();
+    renderChessBoard();
+    currentPlayer = 'white';
+    isGameActive = true;
+    selectedSquare = null;
+    gameHistory = [];
+    updateGameStatus("New game started! Your turn!");
+    try {
+        playSound('success');
+    } catch (e) {
+        console.log('playSound error:', e);
+    }
+};
+
+// Undo move (simplified)
+window.undoMove = function() {
+    updateGameStatus("Undo feature coming soon!");
+    try {
+        playSound('click');
+    } catch (e) {
+        console.log('playSound error:', e);
+    }
+};
+
+// Get hint
+window.getHint = function() {
+    const hints = [
+        "Control the center squares early!",
+        "Develop your knights before bishops",
+        "Castle early to keep your king safe",
+        "Don't move the same piece twice in opening",
+        "Look for tactics like forks and pins!",
+        "Connect your rooks",
+        "Think before you move!"
+    ];
+    const randomHint = hints[Math.floor(Math.random() * hints.length)];
+    updateGameStatus(`💡 Hint: ${randomHint}`);
+    try {
+        playSound('click');
+    } catch (e) {
+        console.log('playSound error:', e);
+    }
+};
+
+// Update game status
+function updateGameStatus(message) {
+    const statusElement = document.getElementById('gameStatus');
+    if (statusElement) {
+        statusElement.textContent = message;
+    }
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('chessGameModal');
+    if (event.target === modal) {
+        closeChessGame();
+    }
+}

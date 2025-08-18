@@ -15,6 +15,52 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* Responsive Typography Scaling */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    html {
+        font-size: 17px;
+    }
+}
+
+@media (min-width: 1441px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+/* Enhanced viewport handling */
+@supports (height: 100dvh) {
+    .hero-section {
+        min-height: 100dvh;
+    }
+}
+
+@supports not (height: 100dvh) {
+    .hero-section {
+        min-height: 100vh;
+    }
 }
 
 body {
@@ -23,7 +69,6 @@ body {
     color: var(--text-primary);
     background: var(--bg-dark);
     overflow-x: hidden;
-    cursor: auto;
     transition: all 0.5s ease;
 }
 
@@ -255,71 +300,6 @@ body {
 }
 
 /* ===== CUSTOM CURSOR ===== */
-.custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    background: #F7F48B;
-    border: 2px solid #70A1D7;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: all 0.2s ease;
-    box-shadow: 0 0 15px rgba(247, 244, 139, 0.8), 0 0 25px rgba(112, 161, 215, 0.6);
-    transform: translate(-50%, -50%);
-    opacity: 1;
-}
-
-.cursor-trail {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 12px;
-    height: 12px;
-    background: var(--yellow);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    opacity: 0.8;
-    box-shadow: var(--glow-yellow);
-    transform: translate(-50%, -50%);
-}
-
-/* ===== STAR TRAIL SYSTEM ===== */
-.star-trail {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9996;
-    font-size: 16px;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease-out;
-    animation: starTwinkle 2s infinite ease-in-out;
-}
-
-.star-trail.star-1 { animation-delay: 0s; font-size: 18px; }
-.star-trail.star-2 { animation-delay: 0.1s; font-size: 14px; }
-.star-trail.star-3 { animation-delay: 0.2s; font-size: 16px; }
-.star-trail.star-4 { animation-delay: 0.3s; font-size: 12px; }
-.star-trail.star-5 { animation-delay: 0.4s; font-size: 15px; }
-.star-trail.star-6 { animation-delay: 0.5s; font-size: 17px; }
-.star-trail.star-7 { animation-delay: 0.6s; font-size: 13px; }
-.star-trail.star-8 { animation-delay: 0.7s; font-size: 14px; }
-
-@keyframes starTwinkle {
-    0%, 100% { 
-        opacity: 0.7;
-        transform: translate(-50%, -50%) scale(1) rotate(0deg);
-    }
-    50% { 
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.4) rotate(180deg);
-    }
-}
 
 /* ===== RAINBOW PLANET CURSOR FOLLOWER ===== */
 .rainbow-planet {
@@ -409,6 +389,19 @@ body {
 @keyframes cloud-drift {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(-360deg); }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 500px;
+    }
 }
 
 .planet-core {
@@ -1102,6 +1095,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--space-6);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* ===== MAIN CONTENT ===== */
@@ -1214,7 +1209,7 @@ body {
 }
 
 .name-highlight {
-    background: linear-gradient(135deg, var(--primary-blue), var(--yellow), var(--coral));
+    background: linear-gradient(135deg, var(--coral), var(--yellow), var(--primary-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1515,11 +1510,11 @@ section {
 .card-header h3 {
     font-family: var(--font-display);
     font-size: 1.3rem;
-    color: var(--text-primary);
+    color: white;
 }
 
 .card-content p {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
     margin-bottom: var(--space-4);
 }
@@ -1685,13 +1680,22 @@ section {
 }
 
 .interest-card {
-    background: var(--bg-card);
+    background: linear-gradient(135deg, #70A1D7 0%, #A1DE93 100%);
     border: 2px solid var(--navbar-border);
     border-radius: var(--radius-xl);
     padding: var(--space-6);
     transition: all 0.3s ease;
+    color: white;
     position: relative;
     overflow: hidden;
+}
+
+.interest-card h3 {
+    color: white;
+}
+
+.interest-card p {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .interest-card.featured {
@@ -1769,13 +1773,14 @@ section {
 }
 
 .book-card {
-    background: var(--bg-card);
+    background: linear-gradient(135deg, #70A1D7 0%, #A1DE93 100%);
     border: 2px solid var(--navbar-border);
     border-radius: var(--radius-lg);
     padding: var(--space-4);
     text-align: center;
     transition: all 0.3s ease;
     position: relative;
+    color: white;
 }
 
 .book-card.favorite {
@@ -1867,12 +1872,13 @@ section {
 }
 
 .weekend-card {
-    background: var(--bg-card);
+    background: linear-gradient(135deg, #70A1D7 0%, #A1DE93 100%);
     border: 2px solid var(--navbar-border);
     border-radius: var(--radius-xl);
     padding: var(--space-6);
     text-align: center;
     transition: all 0.3s ease;
+    color: white;
 }
 
 .weekend-card:hover {
@@ -1888,13 +1894,13 @@ section {
 }
 
 .weekend-card h3 {
-    color: var(--text-primary);
+    color: white;
     margin-bottom: var(--space-3);
     font-family: var(--font-display);
 }
 
 .weekend-card p {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
 }
 
@@ -2531,56 +2537,284 @@ section {
 /* ===== RESPONSIVE DESIGN ===== */
 
 /* Tablet Styles */
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet Styles (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        max-width: 720px;
+        padding: 0 var(--space-6);
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-6);
+        align-items: center;
+        padding: var(--space-6) 0;
+    }
+    
+    .hero-greeting {
+        order: 1;
+    }
+    
+    .hero-character {
+        order: 2;
+        transform: scale(0.9);
+    }
+    
+    .interests-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+    }
+    
+    .dreams-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+    }
+    
+    .weekend-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+    }
+    
+    .book-collection {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+    }
+    
+    .movie-cards {
+        flex-direction: row;
+        gap: var(--space-4);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .chess-modal-content {
+        width: 85%;
+        max-width: 600px;
+        margin: 3vh auto;
+        padding: var(--space-6);
+    }
+    
+    .game-chess-board {
+        width: 400px;
+        height: 400px;
+        max-width: 90%;
+        max-height: 90%;
+        margin: 0 auto;
+    }
+    
+    .nav-menu {
+        gap: var(--space-4);
+    }
+    
+    .nav-link {
+        font-size: 0.95rem;
+        padding: var(--space-2) var(--space-3);
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+        line-height: 1.1;
+    }
+    
+    .btn {
+        padding: var(--space-3) var(--space-5);
+        font-size: 1rem;
+        min-height: 48px;
+    }
+    
+    .interests-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--space-3);
+    }
+    
+    .tab-btn {
+        font-size: 0.95rem;
+        padding: var(--space-3) var(--space-4);
+        min-width: 140px;
+        min-height: 44px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-6);
+        text-align: left;
+    }
+    
+    .footer-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+    }
+}
+
+/* Mobile and Small Tablet Styles (max-width: 768px) */
 @media (max-width: 768px) {
+    .nav-container {
+        padding: 0 var(--space-4);
+    }
+    
     .nav-menu {
         display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--bg-surface);
+        position: fixed;
+        top: 70px;
+        left: var(--space-3);
+        right: var(--space-3);
+        background: rgba(21, 24, 33, 0.95);
+        backdrop-filter: blur(10px);
         border: 2px solid var(--primary-blue);
         border-radius: var(--radius-lg);
-        margin: var(--space-2);
-        padding: var(--space-4);
+        padding: var(--space-5);
         flex-direction: column;
-        gap: var(--space-2);
+        gap: var(--space-3);
+        z-index: 1000;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
     }
 
     .nav-menu.active {
         display: flex;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    .nav-link {
+        padding: var(--space-3) var(--space-4);
+        font-size: 1.1rem;
+        text-align: center;
+        border-radius: var(--radius-md);
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+        background: var(--primary-blue);
+        transform: translateY(-2px);
     }
 
     .mobile-toggle {
         display: flex !important;
+        width: 44px;
+        height: 44px;
+        padding: 8px;
+    }
+    
+    .mobile-toggle span {
+        width: 24px;
+        height: 3px;
+        background: var(--text-primary);
+        transition: all 0.3s ease;
+        border-radius: 2px;
+    }
+    
+    .mobile-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+    
+    .mobile-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .mobile-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
     }
 
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: var(--space-8);
+        gap: var(--space-6);
+        padding: var(--space-6) 0;
+    }
+    
+    .hero-greeting {
+        order: 2;
     }
 
     .hero-character {
-        order: -1;
+        order: 1;
+        transform: scale(0.8);
+        margin-bottom: var(--space-4);
     }
-
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-4);
+        width: 100%;
+        margin-top: var(--space-4);
+    }
+    
+    .hero-actions .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+        padding: var(--space-4) var(--space-5);
+        font-size: 1.1rem;
+        min-height: 56px;
+    }
 
     .about-grid {
         grid-template-columns: 1fr;
+        gap: var(--space-4);
     }
 
     .reading-showcase {
         grid-template-columns: 1fr;
+        gap: var(--space-4);
     }
 
     .entertainment-showcase {
         grid-template-columns: 1fr;
+        gap: var(--space-4);
     }
 
     .guestbook-container {
         grid-template-columns: 1fr;
+        gap: var(--space-4);
     }
+    
+    .book-collection {
+        grid-template-columns: 1fr;
+        gap: var(--space-3);
+    }
+    
+    .interests-tabs {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        justify-content: center;
+    }
+    
+    .tab-btn {
+        font-size: 0.9rem;
+        padding: var(--space-2) var(--space-3);
+        min-width: 120px;
+    }
+    
+    .floating-planets,
+    .floating-emojis,
+    .cosmic-particles {
+        transform: scale(0.7);
+        opacity: 0.6;
+    }
+    
+    .section {
+        padding: var(--space-8) 0;
+    }
+    
+    .container {
+        padding: 0 var(--space-4);
+    }
+}
 
     .footer-content {
         grid-template-columns: 1fr;
@@ -2593,58 +2827,367 @@ section {
 }
 
 /* Mobile Styles */
+/* Small Mobile Styles (max-width: 480px) */
 @media (max-width: 480px) {
     .container {
-        padding: 0 var(--space-4);
+        padding: 0 var(--space-3);
+        max-width: 100%;
+    }
+    
+    .navbar {
+        padding: var(--space-3) 0;
+    }
+    
+    .nav-container {
+        padding: 0 var(--space-3);
+    }
+    
+    .nav-brand .logo-text {
+        font-size: 1.3rem;
+    }
+    
+    .nav-controls {
+        gap: var(--space-2);
+    }
+    
+    .nav-controls button {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        line-height: 1.2;
+        margin-bottom: var(--space-4);
+        text-align: center;
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        line-height: 1.1;
+        margin-bottom: var(--space-3);
     }
-
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: var(--space-4);
+    }
+    
+    .hero-subtitle .age-info {
+        font-size: 0.95rem;
+        margin-bottom: var(--space-2);
+    }
+    
+    .hero-subtitle .fun-intro {
+        font-size: 1rem;
+    }
+    
+    .hero-content {
+        padding: var(--space-4) 0;
+        gap: var(--space-4);
+    }
+    
+    .hero-character {
+        transform: scale(0.7);
+        margin-bottom: var(--space-2);
+    }
 
     .interests-tabs {
         flex-direction: column;
         align-items: center;
+        gap: var(--space-3);
+        margin-bottom: var(--space-6);
     }
 
     .tab-btn {
         width: 100%;
-        max-width: 200px;
+        max-width: 320px;
+        padding: var(--space-4) var(--space-5);
+        font-size: 1rem;
+        min-height: 50px;
+        font-weight: 500;
+        border-radius: var(--radius-lg);
+    }
+    
+    .tab-btn.active {
+        transform: none;
+        box-shadow: 0 4px 20px var(--hover-glow);
     }
 
     .interests-grid,
     .dreams-grid,
     .weekend-grid {
         grid-template-columns: 1fr;
+        gap: var(--space-4);
     }
 
     .hero-actions {
         flex-direction: column;
         align-items: center;
+        gap: var(--space-4);
+        width: 100%;
+        margin-top: var(--space-4);
+    }
+    
+    .section {
+        padding: var(--space-6) 0;
+    }
+    
+    .section:first-child {
+        padding-top: var(--space-8);
+    }
+    
+    /* Improved spacing for mobile cards */
+    .about-grid,
+    .interests-grid,
+    .dreams-grid,
+    .weekend-grid {
+        gap: var(--space-4);
+        margin-top: var(--space-4);
+    }
+    
+    .guestbook-container {
+        gap: var(--space-5);
+    }
+    
+    .footer {
+        padding: var(--space-6) 0 var(--space-4);
+    }
+    
+    .footer-content {
+        gap: var(--space-5);
     }
 
     .btn {
         width: 100%;
-        max-width: 250px;
+        max-width: 320px;
         justify-content: center;
+        padding: var(--space-4) var(--space-5);
+        font-size: 1.05rem;
+        min-height: 52px;
+        font-weight: 500;
+        border-radius: var(--radius-lg);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary-blue), var(--hover-blue));
+    }
+    
+    .btn-secondary {
+        background: linear-gradient(135deg, var(--coral), #e11d48);
     }
 
     .power-list {
         flex-direction: column;
         align-items: center;
+        gap: var(--space-2);
     }
 
     .movie-cards {
         flex-direction: column;
+        gap: var(--space-3);
     }
+    
+    /* Enhanced touch-friendly interactions */
+    .interest-card,
+    .dream-card,
+    .weekend-card,
+    .book-card {
+        padding: var(--space-5);
+        margin-bottom: var(--space-4);
+        min-height: 140px;
+        transform: none;
+        border-radius: var(--radius-lg);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    
+    .interest-card:active,
+    .dream-card:active,
+    .weekend-card:active,
+    .book-card:active {
+        transform: scale(0.98);
+        border-color: var(--primary-blue);
+        box-shadow: 0 4px 20px var(--hover-glow);
+    }
+    
+    .interest-card:hover,
+    .dream-card:hover,
+    .weekend-card:hover,
+    .book-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(112, 161, 215, 0.2);
+    }
+    
+    /* Touch-friendly modal controls */
+    .close-surprise,
+    .modal-close {
+        min-width: 44px;
+        min-height: 44px;
+        padding: var(--space-3) var(--space-4);
+        font-size: 1.1rem;
+        border-radius: var(--radius-lg);
+    }
+    
+    /* Improved form controls for touch */
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        min-height: 48px;
+        padding: var(--space-3) var(--space-4);
+        font-size: 1rem;
+        border-radius: var(--radius-md);
+        border: 2px solid var(--bg-card);
+        transition: all 0.3s ease;
+    }
+    
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 3px rgba(112, 161, 215, 0.2);
+        outline: none;
+    }
+    
+    /* Mobile-specific navigation improvements */
+    .navbar {
+        padding: var(--space-2) 0;
+        backdrop-filter: blur(10px);
+    }
+    
+    .nav-container {
+        padding: 0 var(--space-3);
+    }
+    
+    .nav-brand .logo-text {
+        font-size: 1.5rem;
+    }
+    
+    .mobile-toggle {
+        width: 44px;
+        height: 44px;
+        padding: var(--space-2);
+    }
+    
+    /* Better spacing for mobile */
+    .section {
+        padding: var(--space-6) 0;
+    }
+    
+    .hero-section {
+        padding: var(--space-4) 0;
+        min-height: 70vh;
+    }
+    
+    /* Mobile typography improvements */
+    .section-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .card-description {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
+    /* Footer improvements for mobile */
+    .footer {
+        padding: var(--space-6) 0 var(--space-4);
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+        text-align: center;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+}
 
     .book-collection {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large Desktop Styles (1024px+) */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1200px;
+        padding: 0 var(--space-8);
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-12);
+        align-items: center;
+    }
+    
+    .interests-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-6);
+    }
+    
+    .dreams-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-6);
+    }
+    
+    .weekend-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-6);
+    }
+    
+    .book-collection {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-6);
+    }
+    
+    .chess-modal-content {
+        width: 70%;
+        max-width: 800px;
+    }
+    
+    .game-chess-board {
+        width: 480px;
+        height: 480px;
+    }
+    
+    .section {
+        padding: var(--space-16) 0;
+    }
+    
+    .nav-menu {
+        gap: var(--space-6);
+    }
+    
+    .nav-link {
+        font-size: 1.1rem;
+        padding: var(--space-3) var(--space-4);
+    }
+    
+    /* Enhanced hover effects for desktop */
+    .interest-card,
+    .dream-card,
+    .weekend-card,
+    .book-card {
+        transition: all 0.3s ease;
+    }
+    
+    .interest-card:hover,
+    .dream-card:hover,
+    .weekend-card:hover,
+    .book-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     }
 }
 
@@ -2661,14 +3204,89 @@ section {
     .section-title {
         font-size: 4rem;
     }
+    
+    .interests-grid,
+    .dreams-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .weekend-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 /* High DPI Screens */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .custom-cursor,
-    .cursor-trail {
-        transform: scale(0.5);
-        transform-origin: top left;
+}
+
+/* Touch-friendly improvements for all devices */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch device specific styles */
+    .btn,
+    .tab-btn,
+    .nav-link,
+    .mobile-toggle {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .interest-card,
+    .dream-card,
+    .weekend-card,
+    .book-card {
+        transition: all 0.2s ease;
+    }
+    
+    .interest-card:active,
+    .dream-card:active,
+    .weekend-card:active,
+    .book-card:active {
+        transform: scale(0.98);
+        background: var(--bg-surface-hover);
+    }
+    
+    /* Disable complex hover effects on touch devices */
+    .interest-card:hover,
+    .dream-card:hover,
+    .weekend-card:hover,
+    .book-card:hover {
+        transform: none;
+    }
+    
+    /* Better touch targets */
+    .chess-square {
+        min-height: 35px;
+        min-width: 35px;
+        width: calc((100vw - 120px) / 8);
+        height: calc((100vw - 120px) / 8);
+        max-width: 35px;
+        max-height: 35px;
+    }
+    
+    .chess-piece-game {
+        font-size: 1rem !important;
+    }
+}
+
+/* Landscape orientation for mobile devices */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    .hero-section {
+        min-height: 50vh;
+        padding: var(--space-4) 0;
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+        align-items: center;
+    }
+    
+    .hero-character {
+        transform: scale(0.7);
+    }
+    
+    .section {
+        padding: var(--space-6) 0;
     }
 }
 
@@ -2789,8 +3407,6 @@ section {
 /* Print Styles */
 @media print {
     .navbar,
-    .custom-cursor,
-    .cursor-trail,
     .starfield,
     .surprise-modal {
         display: none !important;
@@ -2803,5 +3419,2777 @@ section {
 
     .main-content {
         margin-top: 0 !important;
+    }
+}
+
+/* ===== CHESS GAME MODAL ===== */
+.chess-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(30, 41, 59, 0.9));
+    backdrop-filter: blur(10px);
+    animation: modalFadeIn 0.5s ease-out;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(10px);
+    }
+}
+
+.chess-modal-content {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    margin: 1vh auto;
+    padding: 20px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 650px;
+    max-height: 98vh;
+    overflow-y: auto;
+    box-shadow: 
+        0 25px 50px rgba(96, 165, 250, 0.4),
+        0 0 0 1px rgba(96, 165, 250, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    animation: modalSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chess-modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #60a5fa, #a855f7, #ec4899, #f59e0b);
+    padding: 3px;
+    border-radius: 20px;
+    z-index: -1;
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.chess-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #475569;
+}
+
+.chess-modal-header h2 {
+    color: #f1f5f9;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.close-chess {
+    background: #ef4444;
+    color: white;
+    border: none;
+    width: 35px;
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.close-chess:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(148, 163, 184, 0.1);
+    border-radius: 10px;
+    border: 1px solid #475569;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.player-name {
+    font-weight: bold;
+    color: #f1f5f9;
+    font-size: 1.1rem;
+}
+
+.player-color {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.vs {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #60a5fa;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+}
+
+.chess-board-container {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    padding: 0 10px;
+}
+
+.game-chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: min(420px, 85vw);
+    height: min(420px, 85vw);
+    aspect-ratio: 1;
+    max-width: 450px;
+    max-height: 450px;
+    margin: 0 auto;
+    border: 4px solid transparent;
+    background: linear-gradient(45deg, #60a5fa, #a855f7) border-box;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 
+        0 15px 35px rgba(96, 165, 250, 0.4),
+        0 5px 15px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    animation: boardGlow 4s ease-in-out infinite;
+}
+
+.game-chess-board::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: linear-gradient(45deg, #60a5fa, #a855f7, #ec4899, #f59e0b);
+    border-radius: 15px;
+    z-index: -1;
+    animation: borderRotate 6s linear infinite;
+}
+
+@keyframes boardGlow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.3));
+    }
+    50% { 
+        filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.6));
+    }
+}
+
+@keyframes borderRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.chess-square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.chess-square::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(96, 165, 250, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.chess-square.light {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.chess-square.dark {
+    background: linear-gradient(135deg, #475569 0%, #334155 100%);
+}
+
+.chess-square:hover {
+    transform: scale(1.02);
+    box-shadow: 
+        inset 0 0 25px rgba(96, 165, 250, 0.4),
+        0 0 15px rgba(96, 165, 250, 0.3);
+}
+
+.chess-square:hover::before {
+    opacity: 1;
+}
+
+.chess-square.selected {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    box-shadow: 
+        inset 0 0 30px rgba(251, 191, 36, 0.6),
+        0 0 20px rgba(251, 191, 36, 0.5);
+    animation: selectedPulse 1.5s ease-in-out infinite;
+}
+
+.chess-square.valid-move {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    box-shadow: 
+        inset 0 0 20px rgba(16, 185, 129, 0.5),
+        0 0 15px rgba(16, 185, 129, 0.4);
+    animation: validMovePulse 2s ease-in-out infinite;
+}
+
+.chess-square.capture-move {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+    box-shadow: 
+        inset 0 0 25px rgba(239, 68, 68, 0.6),
+        0 0 20px rgba(239, 68, 68, 0.5);
+    animation: capturePulse 1s ease-in-out infinite;
+}
+
+@keyframes selectedPulse {
+    0%, 100% { 
+        box-shadow: 
+            inset 0 0 30px rgba(251, 191, 36, 0.6),
+            0 0 20px rgba(251, 191, 36, 0.5);
+    }
+    50% { 
+        box-shadow: 
+            inset 0 0 40px rgba(251, 191, 36, 0.8),
+            0 0 30px rgba(251, 191, 36, 0.7);
+    }
+}
+
+@keyframes validMovePulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+@keyframes capturePulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+.chess-piece-game {
+    font-size: 2.2rem;
+    user-select: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        0 0 10px rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    animation: pieceIdle 3s ease-in-out infinite;
+}
+
+.chess-piece-game.moving {
+    transform: scale(1.3) rotate(10deg);
+    filter: drop-shadow(0 5px 15px rgba(96, 165, 250, 0.5));
+    animation: pieceMove 0.5s ease-in-out;
+}
+
+.chess-piece-game.captured {
+    animation: pieceCapture 0.8s ease-in-out forwards;
+}
+
+.chess-piece-game.new-piece {
+    animation: pieceAppear 0.6s ease-out;
+}
+
+.chess-square:hover .chess-piece-game {
+    transform: scale(1.15) translateY(-2px);
+    filter: drop-shadow(0 5px 10px rgba(96, 165, 250, 0.4));
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        0 0 15px rgba(96, 165, 250, 0.6);
+}
+
+@keyframes pieceIdle {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% { 
+        transform: translateY(-1px) rotate(1deg);
+    }
+}
+
+@keyframes pieceMove {
+    0% { 
+        transform: scale(1) rotate(0deg);
+    }
+    50% { 
+        transform: scale(1.4) rotate(15deg);
+        filter: drop-shadow(0 8px 20px rgba(96, 165, 250, 0.7));
+    }
+    100% { 
+        transform: scale(1.1) rotate(0deg);
+    }
+}
+
+@keyframes pieceCapture {
+    0% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    25% { 
+        transform: scale(1.2) rotate(10deg);
+        filter: drop-shadow(0 5px 15px rgba(239, 68, 68, 0.6));
+    }
+    50% { 
+        transform: scale(1.4) rotate(-10deg);
+        opacity: 0.8;
+    }
+    100% { 
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+        filter: drop-shadow(0 0 0 transparent);
+    }
+}
+
+@keyframes pieceAppear {
+    0% { 
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    50% { 
+        transform: scale(1.3) rotate(0deg);
+        opacity: 0.8;
+        filter: drop-shadow(0 5px 15px rgba(16, 185, 129, 0.6));
+    }
+    100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.game-controls .btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.game-controls .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.game-controls .btn:hover::before {
+    left: 100%;
+}
+
+.game-controls .btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(107, 114, 128, 0.5);
+}
+
+.btn-accent {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.btn-accent:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+}
+
+.game-status {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(148, 163, 184, 0.15) 0%, rgba(71, 85, 105, 0.1) 100%);
+    border-radius: 15px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-status::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #60a5fa, #a855f7, #ec4899);
+    padding: 2px;
+    border-radius: 15px;
+    z-index: -1;
+    animation: statusGlow 2s ease-in-out infinite;
+}
+
+.game-status p {
+    color: #f1f5f9;
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusGlow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+@keyframes statusPulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.9;
+    }
+    50% { 
+        transform: scale(1.02);
+        opacity: 1;
+    }
+}
+
+/* Chess card hover effect */
+.chess-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chess-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(96, 165, 250, 0.3);
+}
+
+.chess-hint {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #60a5fa;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ===== REALISTIC CRICKET GAME STYLES ===== */
+
+.realistic-cricket-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a4d0a 0%, #1a5c1a 50%, #0a4d0a 100%);
+    backdrop-filter: blur(3px);
+}
+
+.realistic-cricket-content {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    margin: 2% auto;
+    padding: 25px;
+    border: 2px solid #2d5a2d;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 95vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Realistic Cricket Header */
+.cricket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #2d5a2d 0%, #1a4a1a 100%);
+    border-radius: 8px;
+    color: white;
+}
+
+.cricket-header h2 {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.close-cricket {
+    background: #dc3545;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-cricket:hover {
+    background: #c82333;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Google Doodle Cricket Game Container */
+.google-cricket-game {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Doodle Style Field */
+.doodle-field {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, #7ED321 0%, #50E3C2 100%);
+    border: 3px solid #4A90E2;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.grass-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(126, 211, 33, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 60%, rgba(80, 227, 194, 0.3) 0%, transparent 50%),
+        linear-gradient(135deg, #7ED321 0%, #50E3C2 100%);
+}
+
+/* Boundary Circle */
+.boundary-circle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 2px dashed #4A90E2;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+.boundary-rope {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+    border: 3px solid #E74C3C;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Cricket Pitch */
+.cricket-pitch {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 60px;
+    background: #F5A623;
+    border: 2px solid #8B4513;
+    border-radius: 8px;
+}
+
+.pitch-lines {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 2px;
+    background: white;
+    box-shadow: 0 -20px 0 white, 0 20px 0 white;
+}
+
+.stumps {
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    z-index: 5;
+}
+
+/* Cricket (insect) Batter */
+.cricket-batter {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.cricket-body {
+    font-size: 2rem;
+    margin-right: 5px;
+    transform-origin: center;
+    transition: transform 0.2s ease;
+}
+
+.cricket-bat {
+    font-size: 1.2rem;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease;
+}
+
+.cricket-batter.batting .cricket-body {
+    transform: scale(1.2) rotate(-10deg);
+}
+
+.cricket-batter.batting .cricket-bat {
+    transform: rotate(45deg) scale(1.3);
+}
+
+/* Snail Bowler */
+.snail-bowler {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    z-index: 10;
+    transition: all 0.5s ease;
+}
+
+.snail-bowler.bowling {
+    animation: snailBowl 1s ease-in-out;
+}
+
+/* Cricket Ball */
+.cricket-ball {
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    z-index: 8;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.cricket-ball.active {
+    opacity: 1;
+}
+
+/* Fielder Bugs */
+.fielder-bug {
+    position: absolute;
+    font-size: 1.2rem;
+    z-index: 6;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.fielder-bug:hover {
+    transform: scale(1.2);
+}
+
+/* Fielder Positions */
+#fielder1 { top: 20%; right: 15%; }
+#fielder2 { top: 30%; right: 5%; }
+#fielder3 { top: 40%; right: 8%; }
+#fielder4 { bottom: 30%; right: 20%; }
+#fielder5 { bottom: 30%; left: 20%; }
+#fielder6 { top: 40%; left: 8%; }
+
+/* Google Doodle Scoreboard */
+.doodle-scoreboard {
+    background: #f8f9fa;
+    border: 2px solid #4A90E2;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.score-display {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.total-score, .balls-remaining {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-number, .balls-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4A90E2;
+    font-family: 'Arial', sans-serif;
+}
+
+.score-label, .balls-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: -5px;
+}
+
+.game-status {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+    margin-top: 10px;
+    background: #E3F2FD;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* Instructions */
+.doodle-instructions {
+    background: #ffffff;
+    border: 2px solid #7ED321;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.instruction-text p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.instruction-text kbd {
+    background: #4A90E2;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.doodle-btn {
+    background: #4A90E2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.doodle-btn:hover {
+    background: #357ABD;
+    transform: scale(1.05);
+}
+
+.doodle-btn.secondary {
+    background: #7ED321;
+}
+
+.doodle-btn.secondary:hover {
+    background: #6BC219;
+}
+
+/* Game Over */
+.game-over {
+    background: #f8f9fa;
+    border: 3px solid #E74C3C;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.game-over h3 {
+    color: #E74C3C;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.game-over p {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Google Doodle Cricket Animations */
+@keyframes snailBowl {
+    0% {
+        transform: translateY(-50%) translateX(0);
+    }
+    50% {
+        transform: translateY(-50%) translateX(20px) scale(1.1);
+    }
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+@keyframes ballFly {
+    0% {
+        transform: translateY(-50%) translateX(0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-50%) translateX(200px) translateY(-30px) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50%) translateX(400px) translateY(0) scale(0.6);
+        opacity: 0;
+    }
+}
+
+@keyframes ballHit {
+    0% {
+        transform: translateY(-50%) translateX(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50%) translateX(-300px) translateY(-100px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+@keyframes fielderCatch {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3) rotate(10deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes scoreUpdate {
+    0% {
+        transform: scale(1);
+        color: #4A90E2;
+    }
+    50% {
+        transform: scale(1.3);
+        color: #E74C3C;
+    }
+    100% {
+        transform: scale(1);
+        color: #4A90E2;
+    }
+}
+
+/* Responsive Design for Google Cricket Doodle */
+.cricket-field {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(45deg, #2d5a2d 0%, #4a7c4a 50%, #2d5a2d 100%);
+    border-radius: var(--radius-lg);
+    border: 3px solid var(--primary-green);
+    overflow: hidden;
+    margin-bottom: var(--space-4);
+}
+
+.field-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.pitch {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 20px;
+    background: linear-gradient(90deg, #8b7355 0%, #a0845c 50%, #8b7355 100%);
+    border-radius: 10px;
+    border: 1px solid #6b5d4f;
+}
+
+.boundary-line {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    left: 2.5%;
+    top: 2.5%;
+    border: 2px dashed var(--accent-yellow);
+    border-radius: var(--radius-lg);
+    opacity: 0.6;
+}
+
+.batsman, .bowler, .ball, .wickets, .fielder {
+    position: absolute;
+    font-size: 2rem;
+    transition: all 0.5s ease;
+    user-select: none;
+}
+
+.batsman {
+    right: 15%;
+    top: 55%;
+    transform: translateY(-50%);
+    z-index: 3;
+}
+
+.bowler {
+    left: 15%;
+    top: 55%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.ball {
+    display: none;
+    left: 20px;
+    top: 60%;
+    z-index: 4;
+    font-size: 1.5rem;
+}
+
+.ball-moving {
+    transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.wickets {
+    right: 10%;
+    top: 55%;
+    transform: translateY(-50%);
+    z-index: 1;
+    font-size: 1.8rem;
+}
+
+/* Fielder Positioning */
+.fielder {
+    font-size: 1.2rem;
+    z-index: 2;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.fielder:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+.fielder.catching {
+    animation: catchAnimation 0.5s ease-out;
+    transform: scale(1.3);
+}
+
+.fielder.celebrating {
+    animation: fielderCelebrate 1s ease-out;
+}
+
+/* Individual fielder positions based on cricket field layout */
+#fielder1[data-position="slip"] {
+    right: 5%;
+    top: 45%;
+}
+
+#fielder2[data-position="point"] {
+    right: 25%;
+    top: 30%;
+}
+
+#fielder3[data-position="cover"] {
+    right: 40%;
+    top: 20%;
+}
+
+#fielder4[data-position="mid-off"] {
+    left: 35%;
+    top: 25%;
+}
+
+#fielder5[data-position="mid-on"] {
+    left: 35%;
+    top: 75%;
+}
+
+#fielder6[data-position="square-leg"] {
+    right: 25%;
+    top: 80%;
+}
+
+#fielder7[data-position="fine-leg"] {
+    right: 10%;
+    top: 85%;
+}
+
+#fielder8[data-position="long-off"] {
+    left: 10%;
+    top: 15%;
+}
+
+#fielder9[data-position="long-on"] {
+    left: 10%;
+    top: 85%;
+}
+
+#fielder10[data-position="third-man"] {
+    right: 15%;
+    top: 10%;
+}
+
+#fielder11[data-position="wicket-keeper"] {
+    right: 8%;
+    top: 55%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+}
+
+/* Scoreboard */
+.cricket-scoreboard {
+    background: linear-gradient(135deg, #1a1d35 0%, #2a2f4a 100%);
+    border: 2px solid var(--primary-blue);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.score-display {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-3);
+    background: rgba(112, 161, 215, 0.1);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--primary-blue);
+}
+
+.score-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-1);
+}
+
+.score-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-blue);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.recent-shots {
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+/* Cricket Controls */
+.cricket-controls {
+    background: linear-gradient(135deg, #2a2f4a 0%, #1a1d35 100%);
+    border: 2px solid var(--accent-green);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+}
+
+.batting-instructions {
+    text-align: center;
+    margin-bottom: var(--space-4);
+}
+
+.batting-instructions p {
+    color: var(--accent-yellow);
+    font-weight: bold;
+    margin-bottom: var(--space-4);
+}
+
+/* Timing Indicator */
+.timing-indicator {
+    margin-bottom: var(--space-6);
+}
+
+.timing-bar {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(90deg, #ff4444 0%, #ffff44 40%, #44ff44 50%, #44ff44 70%, #ffff44 90%, #ff4444 100%);
+    border-radius: 10px;
+    border: 2px solid var(--text-primary);
+    overflow: hidden;
+}
+
+.timing-zone {
+    position: absolute;
+    top: 0;
+    width: 20%;
+    height: 100%;
+    background: rgba(68, 255, 68, 0.8);
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+    animation: zoneGlow 1s ease-in-out infinite alternate;
+}
+
+.timing-pointer {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 4px;
+    height: 24px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Game Buttons */
+.game-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.game-buttons .btn {
+    min-width: 140px;
+    padding: var(--space-3) var(--space-6);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Game Result */
+.game-result {
+    background: linear-gradient(135deg, #2a2f4a 0%, #1a1d35 100%);
+    border: 2px solid var(--accent-yellow);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    text-align: center;
+    margin-top: var(--space-4);
+}
+
+.game-result h3 {
+    color: var(--accent-yellow);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: var(--space-3);
+}
+
+.game-result p {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-bottom: var(--space-4);
+}
+
+.result-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+}
+
+.stat-item {
+    background: rgba(112, 161, 215, 0.1);
+    border: 1px solid var(--primary-blue);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    color: var(--primary-blue);
+    font-weight: bold;
+}
+
+/* Cricket Card Enhancement */
+.cricket-game-card {
+    background: linear-gradient(135deg, #70A1D7 0%, #A1DE93 100%);
+    color: white;
+}
+
+.cricket-game-card h3 {
+    color: white;
+}
+
+.cricket-game-card p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.cricket-game-card .cricket-links {
+    margin-top: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.cricket-game-card .cricket-hint {
+    padding: var(--space-2) var(--space-4);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.cricket-game-card .google-doodle-link {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    background: linear-gradient(135deg, #F7F48B 0%, #F47C7C 100%);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius-full);
+    color: #0B0D17;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(247, 244, 139, 0.3);
+}
+
+.cricket-game-card .google-doodle-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(247, 244, 139, 0.5);
+    background: linear-gradient(135deg, #F47C7C 0%, #F7F48B 100%);
+}
+
+.chess-game-card {
+    background: linear-gradient(135deg, #70A1D7 0%, #A1DE93 100%);
+    color: white;
+}
+
+.chess-game-card h3 {
+    color: white;
+}
+
+.chess-game-card p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.chess-game-card .chess-hint {
+    margin-top: var(--space-3);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Cricket Animations */
+@keyframes zoneGlow {
+    from { box-shadow: 0 0 15px rgba(0, 255, 0, 0.6); }
+    to { box-shadow: 0 0 25px rgba(0, 255, 0, 0.9); }
+}
+
+@keyframes sparkEffect {
+    0% {
+        transform: translateY(0) scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-20px) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-40px) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes fireworkEffect {
+    0% {
+        transform: translateY(0) scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-30px) scale(1.2) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-60px) scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(112, 161, 215, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(112, 161, 215, 0.6);
+    }
+}
+
+@keyframes catchAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.4) rotateY(360deg);
+    }
+    100% {
+        transform: scale(1.3);
+    }
+}
+
+@keyframes fielderCelebrate {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.2) rotate(-10deg);
+    }
+    50% {
+        transform: scale(1.3) rotate(10deg);
+    }
+    75% {
+        transform: scale(1.2) rotate(-5deg);
+    }
+}
+
+@keyframes fielderMove {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    100% {
+        transform: translateX(var(--move-x, 0)) translateY(var(--move-y, 0));
+    }
+}
+
+@keyframes catchStarEffect {
+    0% {
+        transform: translate(0, 0) scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(20px, -30px) scale(1.2) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(40px, -60px) scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive design for cricket modal */
+@media (max-width: 768px) {
+    .cricket-modal-content {
+        margin: 2% auto;
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .cricket-field {
+        height: 250px;
+    }
+    
+    .batsman, .bowler, .wickets {
+        font-size: 1.5rem;
+    }
+    
+    .ball {
+        font-size: 1.2rem;
+    }
+    
+    .score-display {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+    }
+    
+    .result-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1025px) {
+    .google-cricket-modal .modal-content {
+        max-width: 800px;
+        margin: 3rem auto;
+    }
+    
+    .cricket-field {
+        height: 350px;
+        cursor: pointer;
+    }
+    
+    .cricket-field:hover {
+        box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+    }
+    
+    .snail-bowler {
+        font-size: 3rem;
+        left: 60px;
+    }
+    
+    .cricket-ball {
+        font-size: 1.5rem;
+        left: 110px;
+    }
+    
+    .doodle-btn {
+        padding: 16px 32px;
+        font-size: 1.2rem;
+        min-height: 52px;
+        transition: all 0.3s ease;
+    }
+    
+    .doodle-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(74, 222, 128, 0.4);
+    }
+    
+    .game-status {
+        font-size: 1.3rem;
+        padding: 16px;
+    }
+    
+    .score-display {
+        gap: 24px;
+    }
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .google-cricket-modal .modal-content {
+        max-width: 90%;
+        margin: 2rem auto;
+    }
+    
+    .cricket-field {
+        height: 280px;
+    }
+    
+    .snail-bowler {
+        font-size: 2.5rem;
+        left: 50px;
+    }
+    
+    .cricket-ball {
+        font-size: 1.3rem;
+        left: 90px;
+    }
+    
+    .doodle-btn {
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        min-height: 48px;
+    }
+    
+    .game-status {
+        font-size: 1.1rem;
+        padding: 12px;
+    }
+}
+
+/* Mobile landscape adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+    .google-cricket-modal .modal-content {
+        max-width: 95%;
+        margin: 1rem auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .cricket-field {
+        height: 200px;
+    }
+    
+    .game-controls {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+/* Mobile portrait adjustments */
+@media (max-width: 768px) {
+    .google-cricket-modal {
+        padding: 10px;
+    }
+    
+    .google-cricket-modal .modal-content {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 12px;
+        max-height: 95vh;
+        overflow-y: auto;
+    }
+    
+    .cricket-field {
+        height: 250px;
+        margin-bottom: 16px;
+    }
+    
+    .snail-bowler {
+        font-size: 2rem;
+        left: 30px;
+    }
+    
+    .cricket-ball {
+        font-size: 1.2rem;
+        left: 70px;
+    }
+    
+    .batsman, .bowler, .wickets {
+        font-size: 1.5rem;
+    }
+    
+    .ball {
+        font-size: 1.2rem;
+    }
+    
+    .doodle-btn {
+        padding: 14px 28px;
+        font-size: 1.1rem;
+        min-height: 48px;
+        width: 100%;
+        margin: 8px 0;
+    }
+    
+    .game-status {
+        font-size: 1rem;
+        padding: 12px;
+        margin: 16px 0;
+        text-align: center;
+    }
+    
+    .score-display {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 16px 0;
+    }
+    
+    .game-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cricket-field {
+        height: 200px;
+    }
+    
+    .snail-bowler {
+        font-size: 1.8rem;
+        left: 25px;
+    }
+    
+    .cricket-ball {
+        font-size: 1rem;
+        left: 60px;
+    }
+    
+    .batsman, .bowler, .wickets {
+        font-size: 1.2rem;
+    }
+    
+    .ball {
+        font-size: 1rem;
+    }
+    
+    .cricket-modal-header h2 {
+        font-size: 1.4rem;
+    }
+    
+    .doodle-btn {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+    
+    .game-status {
+        font-size: 0.9rem;
+    }
+}
+
+/* Responsive design for chess modal */
+@media (max-width: 480px) {
+    .chess-modal {
+        padding: var(--space-2);
+    }
+    
+    .chess-modal-content {
+        margin: 5vh auto;
+        width: 95vw;
+        max-width: 95vw;
+        padding: var(--space-4);
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .chess-modal-header {
+        margin-bottom: var(--space-3);
+        padding-bottom: var(--space-2);
+    }
+    
+    .chess-modal-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .close-chess {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        font-size: 1.1rem;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+    
+    .game-chess-board {
+        width: min(320px, calc(100vw - 60px));
+        height: min(320px, calc(100vw - 60px));
+        aspect-ratio: 1;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        gap: 0;
+        border: 2px solid var(--primary-blue);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+    }
+    
+    .chess-piece-game {
+        font-size: 1.2rem;
+    }
+    
+    .chess-square {
+        aspect-ratio: 1;
+        min-height: auto;
+        min-width: auto;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: var(--space-2);
+        margin-top: var(--space-3);
+    }
+    
+    .game-controls {
+        gap: var(--space-2);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .game-controls .btn {
+        font-size: 0.9rem;
+        padding: var(--space-2) var(--space-3);
+        min-height: 40px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .chess-modal-content {
+        margin: 5vh auto;
+        width: 90%;
+        max-width: 500px;
+        padding: var(--space-5);
+    }
+    
+    .game-chess-board {
+        width: min(380px, calc(100vw - 60px));
+        height: min(380px, calc(100vw - 60px));
+        aspect-ratio: 1;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        gap: 0;
+        border: 2px solid var(--primary-blue);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+    }
+    
+    .chess-piece-game {
+        font-size: 1.6rem;
+    }
+    
+    .chess-square {
+        aspect-ratio: 1;
+        min-height: auto;
+        min-width: auto;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+    
+    .game-controls {
+        gap: var(--space-3);
+    }
+    
+    .game-controls .btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-chess-board {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .chess-piece-game {
+        font-size: 1.2rem;
+    }
+}
+
+/* ===== COMPREHENSIVE REALISTIC CRICKET STYLES ===== */
+
+/* Cricket Game Container */
+.realistic-cricket-game {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Realistic Cricket Field */
+.realistic-field {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: 
+        radial-gradient(ellipse at center, #2d5a2d 0%, #1a4a1a 70%, #0d2d0d 100%);
+    border: 3px solid #2d5a2d;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3);
+}
+
+/* Grass Field Texture */
+.grass-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            #2d5a2d 0px,
+            #2d5a2d 2px,
+            #1e471e 2px,
+            #1e471e 4px
+        ),
+        radial-gradient(circle at 30% 30%, rgba(45, 90, 45, 0.8) 0%, transparent 70%),
+        radial-gradient(circle at 70% 70%, rgba(26, 74, 26, 0.8) 0%, transparent 70%);
+    opacity: 0.7;
+}
+
+/* Boundary Markers */
+.boundary-circle {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 3px dashed #4a7c4a;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.boundary-rope {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+    right: 35px;
+    bottom: 35px;
+    border: 4px solid #8b4513;
+    border-radius: 50%;
+    opacity: 0.8;
+    box-shadow: inset 0 0 10px rgba(139, 69, 19, 0.5);
+}
+
+/* Cricket Pitch with Realistic Details */
+.cricket-pitch {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 80px;
+    background: linear-gradient(135deg, #d2b48c 0%, #daa520 50%, #cd853f 100%);
+    border: 2px solid #8b7355;
+    border-radius: 12px;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pitch-surface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 8px,
+            rgba(139, 115, 85, 0.3) 8px,
+            rgba(139, 115, 85, 0.3) 10px
+        );
+    border-radius: 10px;
+}
+
+/* Crease Lines */
+.crease-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.batting-crease, .bowling-crease {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: white;
+    border-radius: 1px;
+}
+
+.batting-crease {
+    top: 20%;
+}
+
+.bowling-crease {
+    bottom: 20%;
+}
+
+.return-crease {
+    position: absolute;
+    width: 2px;
+    height: 60%;
+    background: white;
+    top: 20%;
+    border-radius: 1px;
+}
+
+.return-crease.left {
+    left: 20%;
+}
+
+.return-crease.right {
+    right: 20%;
+}
+
+/* Realistic Stumps */
+.stumps {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2px;
+    width: 20px;
+    height: 25px;
+    z-index: 5;
+}
+
+.stumps.wicket-keeper {
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.stumps.bowler {
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.stump {
+    width: 4px;
+    height: 20px;
+    background: linear-gradient(180deg, #8b4513 0%, #654321 100%);
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.bails {
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+}
+
+.bail {
+    width: 8px;
+    height: 2px;
+    background: linear-gradient(90deg, #8b4513 0%, #a0522d 100%);
+    border-radius: 1px;
+}
+
+/* Realistic Player Figures */
+.batsman, .bowler, .wicket-keeper, .fielder {
+    position: absolute;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+/* Batsman */
+.batsman {
+    right: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 35px;
+}
+
+.batsman .player-body {
+    width: 12px;
+    height: 20px;
+    background: linear-gradient(180deg, #4169e1 0%, #0000cd 100%);
+    border-radius: 6px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.batsman .cricket-bat {
+    position: absolute;
+    right: -8px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #70A1D7 0%, #A1DE93 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.batsman .cricket-bat::after {
+    content: '🏏';
+    font-size: 12px;
+    color: white;
+}
+
+.batsman .batting-pads {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 8px;
+    background: white;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.batsman .helmet {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 8px;
+    background: linear-gradient(180deg, #2c2c2c 0%, #1a1a1a 100%);
+    border-radius: 7px;
+}
+
+/* Bowler */
+.bowler {
+    left: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 35px;
+}
+
+.bowler .player-body {
+    width: 12px;
+    height: 20px;
+    background: linear-gradient(180deg, #ff6347 0%, #dc143c 100%);
+    border-radius: 6px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.bowler .bowling-arm {
+    position: absolute;
+    right: -6px;
+    top: 2px;
+    width: 12px;
+    height: 2px;
+    background: #ff6347;
+    border-radius: 1px;
+    transform: rotate(-45deg);
+    transition: transform 0.3s ease;
+}
+
+.bowler .legs.running {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 8px;
+    background: #ff6347;
+    border-radius: 3px;
+    animation: runningLegs 0.5s ease-in-out infinite alternate;
+}
+
+/* Wicket Keeper */
+.wicket-keeper {
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 30px;
+}
+
+.wicket-keeper .player-body {
+    width: 10px;
+    height: 16px;
+    background: linear-gradient(180deg, #228b22 0%, #006400 100%);
+    border-radius: 5px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.wicket-keeper .keeper-gloves {
+    position: absolute;
+    left: -3px;
+    right: -3px;
+    top: 8px;
+    height: 6px;
+    background: #8b4513;
+    border-radius: 3px;
+}
+
+.wicket-keeper .keeper-pads {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 8px;
+    background: white;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+/* Fielders */
+.fielder {
+    width: 15px;
+    height: 20px;
+}
+
+.fielder .player-body {
+    width: 8px;
+    height: 12px;
+    background: linear-gradient(180deg, #daa520 0%, #b8860b 100%);
+    border-radius: 4px;
+    margin: 0 auto;
+}
+
+/* Fielder Positions */
+#fielder1[data-position="slip"] {
+    right: 8%;
+    top: 45%;
+}
+
+#fielder2[data-position="point"] {
+    right: 25%;
+    top: 25%;
+}
+
+#fielder3[data-position="cover"] {
+    right: 35%;
+    top: 15%;
+}
+
+#fielder4[data-position="mid-off"] {
+    bottom: 25%;
+    right: 30%;
+}
+
+#fielder5[data-position="mid-on"] {
+    bottom: 25%;
+    left: 30%;
+}
+
+#fielder6[data-position="square-leg"] {
+    top: 35%;
+    left: 15%;
+}
+
+/* Realistic Cricket Ball */
+.realistic-ball {
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #70A1D7 0%, #A1DE93 100%);
+    border-radius: 50%;
+    z-index: 8;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.realistic-ball::after {
+    content: '⚾';
+    font-size: 12px;
+    color: white;
+}
+
+.realistic-ball.active {
+    opacity: 1;
+}
+
+.realistic-ball .ball-seam {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, white 50%, transparent 100%);
+    transform: translateY(-50%);
+    border-radius: 1px;
+}
+
+.realistic-ball .ball-shine {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+/* Power Meter for Timing */
+.power-meter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    padding: 5px;
+    display: none;
+}
+
+.power-meter.active {
+    display: block;
+    animation: meterPulse 0.5s ease-in-out;
+}
+
+.power-bar {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(90deg, #dc3545 0%, #ffc107 30%, #28a745 50%, #ffc107 70%, #dc3545 100%);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.power-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    transition: width 0.1s linear;
+}
+
+.power-indicator {
+    position: absolute;
+    top: -2px;
+    left: 0%;
+    width: 4px;
+    height: 24px;
+    background: white;
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    transition: left 0.1s linear;
+}
+
+.power-zones {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    display: flex;
+}
+
+.zone {
+    flex: 1;
+    height: 100%;
+    border-radius: 2px;
+    margin: 0 1px;
+}
+
+.zone.miss {
+    background: rgba(220, 53, 69, 0.6);
+}
+
+.zone.good {
+    background: rgba(255, 193, 7, 0.6);
+}
+
+.zone.perfect {
+    background: rgba(40, 167, 69, 0.6);
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.8);
+}
+
+/* Professional Scoreboard */
+.professional-scoreboard {
+    background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
+    border: 2px solid #34495e;
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.score-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #34495e;
+}
+
+.team-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #3498db;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.match-info {
+    font-size: 0.9rem;
+    color: #bdc3c7;
+    font-weight: 500;
+}
+
+.score-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.total-score {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #e74c3c;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.score-number {
+    color: #e74c3c;
+}
+
+.wickets-lost {
+    font-size: 1.5rem;
+    color: #95a5a6;
+}
+
+.overs-info {
+    text-align: right;
+}
+
+.overs-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f39c12;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.overs-label {
+    font-size: 0.9rem;
+    color: #bdc3c7;
+    display: block;
+    margin-top: -5px;
+}
+
+.score-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.run-rate, .balls-remaining {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.label {
+    color: #bdc3c7;
+    font-weight: 500;
+}
+
+.value {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.last-ball {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background: rgba(52, 73, 94, 0.5);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.result {
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #34495e;
+    color: white;
+}
+
+.game-status {
+    text-align: center;
+    font-size: 1rem;
+    color: #3498db;
+    font-weight: 600;
+    padding: 12px;
+    background: rgba(52, 152, 219, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+/* Realistic Game Controls */
+.realistic-controls {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border: 2px solid #34495e;
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+}
+
+.batting-instructions {
+    margin-bottom: 20px;
+}
+
+.instruction-text p {
+    margin: 8px 0;
+    font-size: 1rem;
+    color: #ecf0f1;
+    line-height: 1.4;
+}
+
+.shot-types {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #34495e;
+}
+
+.shot-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+}
+
+.zone-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.zone-color.perfect {
+    background: #28a745;
+    box-shadow: 0 0 6px rgba(40, 167, 69, 0.6);
+}
+
+.zone-color.good {
+    background: #ffc107;
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.6);
+}
+
+.zone-color.miss {
+    background: #dc3545;
+    box-shadow: 0 0 6px rgba(220, 53, 69, 0.6);
+}
+
+.control-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.cricket-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cricket-btn.primary {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+}
+
+.cricket-btn.primary:hover {
+    background: linear-gradient(135deg, #218838 0%, #17a2b8 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.cricket-btn.secondary {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+}
+
+.cricket-btn.secondary:hover {
+    background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Match Result Screen */
+.match-result {
+    background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
+    border: 3px solid #e74c3c;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    color: white;
+}
+
+.result-header {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #e74c3c;
+    margin-bottom: 20px;
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.final-score {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f39c12;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.performance-stats {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(52, 73, 94, 0.5);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+}
+
+.result-message {
+    font-size: 1.2rem;
+    color: #3498db;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* Animations for Realistic Cricket */
+@keyframes runningLegs {
+    0% { transform: translateX(-50%) scaleX(1); }
+    100% { transform: translateX(-50%) scaleX(1.1); }
+}
+
+@keyframes meterPulse {
+    0% { transform: translateX(-50%) scale(0.9); opacity: 0; }
+    100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+@keyframes ballBowl {
+    0% {
+        left: 80px;
+        transform: translateY(-50%) scale(1);
+    }
+    100% {
+        left: 300px;
+        transform: translateY(-50%) scale(0.8);
+    }
+}
+
+@keyframes ballHit {
+    0% {
+        transform: translateY(-50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-80px) scale(0.6);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-50px) translateX(200px) scale(0.3);
+        opacity: 0;
+    }
+}
+
+@keyframes battingAction {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    50% { transform: translateY(-50%) rotate(45deg) scale(1.1); }
+    100% { transform: translateY(-50%) rotate(0deg); }
+}
+
+@keyframes bowlingAction {
+    0% { transform: rotate(-45deg); }
+    50% { transform: rotate(45deg) scale(1.2); }
+    100% { transform: rotate(-45deg); }
+}
+
+@keyframes fielderCelebration {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2) rotateY(180deg); }
+    100% { transform: scale(1); }
+}
+
+/* Cricket Icon for Card */
+.cricket-icon {
+    background: linear-gradient(135deg, var(--primary-blue), var(--yellow));
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 2.5rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Chess Icon for Card */
+.chess-icon {
+    background: linear-gradient(135deg, var(--primary-blue), var(--yellow));
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 2.5rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+
+/* Responsive Design for Realistic Cricket */
+@media (max-width: 768px) {
+    .realistic-cricket-content {
+        margin: 1% auto;
+        padding: 15px;
+        width: 95%;
+    }
+    
+    .realistic-field {
+        height: 300px;
+    }
+    
+    .professional-scoreboard {
+        padding: 15px;
+    }
+    
+    .score-main {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .cricket-btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .control-buttons {
+        flex-direction: column;
+    }
+    
+    .shot-types {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .realistic-field {
+        height: 250px;
+    }
+    
+    .team-name {
+        font-size: 1rem;
+    }
+    
+    .total-score {
+        font-size: 2rem;
+    }
+    
+    .result-header {
+        font-size: 1.5rem;
     }
 }
